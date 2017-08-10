@@ -1,0 +1,112 @@
+# install dependencies.
+choco install -y vcredist2013
+
+# the default postgres superuser username and password.
+# see https://www.postgresql.org/docs/9.6/static/libpq-envars.html
+$env:PGUSER = 'postgres'
+$env:PGPASSWORD = 'postgres'
+
+$serviceHome = 'C:/pgsql'
+$serviceName = 'postgres'
+$serviceUsername = '.\postgres'
+$servicePassword = 'HeyH0Password'
+$serviceCredential = New-Object PSCredential $serviceUsername,(ConvertTo-SecureString $servicePassword -AsPlainText -Force)
+
+function psql {
+    &"$serviceHome/bin/psql.exe" -w @Args
+    if ($LASTEXITCODE) {
+        throw "failed with exit code $LASTEXITCODE"
+    }
+}
+
+# download and install binaries.
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-9.6.3-3-windows-x64-binaries.zip'
+$archiveHash = '9def45ae3e48c1637ca81625ecdde72e892454438a268d1d5b7746b124dfa4ba'
+$archiveName = Split-Path $archiveUrl -Leaf
+$archivePath = "$env:TEMP\$archiveName"
+Write-Output "Downloading from $archiveUrl..."
+Invoke-WebRequest $archiveUrl -UseBasicParsing -OutFile $archivePath
+$archiveActualHash = (Get-FileHash $archivePath -Algorithm SHA256).Hash
+if ($archiveHash -ne $archiveActualHash) {
+    throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
+}
+Write-Output "Installing binaries at $serviceHome..."
+Expand-Archive $archivePath -DestinationPath $serviceHome
+Move-Item "$serviceHome\pgsql\*" $serviceHome
+rmdir "$serviceHome\pgsql"
+Remove-Item $archivePath
+
+Write-Output "Creating the $serviceName local service account..."
+Install-User -Credential $serviceCredential
+Grant-Privilege $serviceUsername SeServiceLogonRight
+
+$dataPath = "$serviceHome/data"
+Write-Output "Initializing the database cluster at $dataPath..."
+mkdir $dataPath | Out-Null
+Disable-AclInheritance $dataPath
+Grant-Permission $dataPath $env:USERNAME FullControl
+Grant-Permission $dataPath $serviceUsername FullControl
+&"$serviceHome/bin/initdb.exe" `
+    --username=$env:PGUSER `
+    --auth-host=trust `
+    --auth-local=reject `
+    --encoding=UTF8 `
+    --locale=en `
+    -D $dataPath
+
+Write-Output "Installing the $serviceName service..."
+&"$serviceHome/bin/pg_ctl.exe" `
+    register `
+    -N $serviceName `
+    -U $serviceUsername `
+    -P $servicePassword `
+    -D $dataPath `
+    -S auto `
+    -w
+
+Write-Output "Starting the $serviceName service..."
+Start-Service $serviceName
+
+Write-Host "Setting the $env:PGUSER user password..."
+psql -c "alter role $env:PGUSER login password '$env:PGPASSWORD'" postgres
+
+Write-Host 'Switching from trust to md5 authentication method...'
+Stop-Service $serviceName
+Set-Content -Encoding ascii "$dataPath\pg_hba.conf" (
+    (Get-Content "$dataPath\pg_hba.conf") `
+        -replace '^(#?host\s+.+\s+)trust.*','$1md5'
+)
+
+Write-Host 'Allowing external connections made with the md5 authentication method...'
+@'
+
+# allow md5 authenticated connections from any other address.
+#
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+host    all             all             0.0.0.0/0               md5
+host    all             all             ::/0                    md5
+'@ `
+    | Out-File -Append -Encoding ascii "$dataPath\pg_hba.conf"
+
+Write-Host 'Creating the firewall rule to allow inbound TCP/IP access to the PostgreSQL port 5432...'
+New-NetFirewallRule `
+    -Name 'POSTGRESQL-In-TCP' `
+    -DisplayName 'PostgreSQL (TCP-In)' `
+    -Direction Inbound `
+    -Enabled True `
+    -Protocol TCP `
+    -LocalPort 5432 `
+    | Out-Null
+
+Write-Output "Starting the $serviceName service..."
+Start-Service $serviceName
+
+Write-Output 'Installing the adminpack extension...'
+psql -c 'create extension adminpack' postgres
+
+Write-Output 'Showing pg version, connection information, users and databases...'
+# see https://www.postgresql.org/docs/9.6/static/functions-info.html
+psql -c 'select version()' postgres
+psql -c 'select current_user, current_database(), inet_client_addr(), inet_client_port(), inet_server_addr(), inet_server_port(), pg_backend_pid(), pg_postmaster_start_time()' postgres
+psql -c '\du' postgres
+psql -l
