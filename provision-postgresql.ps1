@@ -12,6 +12,20 @@ $serviceUsername = '.\postgres'
 $servicePassword = 'HeyH0Password'
 $serviceCredential = New-Object PSCredential $serviceUsername,(ConvertTo-SecureString $servicePassword -AsPlainText -Force)
 
+function initdb {
+    &"$serviceHome/bin/initdb.exe" @Args
+    if ($LASTEXITCODE) {
+        throw "failed with exit code $LASTEXITCODE"
+    }
+}
+
+function pg_ctl {
+    &"$serviceHome/bin/pg_ctl.exe" @Args
+    if ($LASTEXITCODE) {
+        throw "failed with exit code $LASTEXITCODE"
+    }
+}
+
 function psql {
     &"$serviceHome/bin/psql.exe" -w @Args
     if ($LASTEXITCODE) {
@@ -46,7 +60,7 @@ mkdir $dataPath | Out-Null
 Disable-AclInheritance $dataPath
 Grant-Permission $dataPath $env:USERNAME FullControl
 Grant-Permission $dataPath $serviceUsername FullControl
-&"$serviceHome/bin/initdb.exe" `
+initdb `
     --username=$env:PGUSER `
     --auth-host=trust `
     --auth-local=reject `
@@ -55,7 +69,7 @@ Grant-Permission $dataPath $serviceUsername FullControl
     -D $dataPath
 
 Write-Output "Installing the $serviceName service..."
-&"$serviceHome/bin/pg_ctl.exe" `
+pg_ctl `
     register `
     -N $serviceName `
     -U $serviceUsername `
