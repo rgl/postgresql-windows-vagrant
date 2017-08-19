@@ -10,5 +10,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "ps.ps1", args: "provision-chocolatey.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "provision-base.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "provision-postgresql.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "examples/python/run.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "examples/go/run.ps1"
 end
