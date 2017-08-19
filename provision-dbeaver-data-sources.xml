@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="postgres-jdbc-15dfb060ba7-6965404a9d7d41f2" provider="postgresql" driver="postgres-jdbc" name="PostgreSQL - postgres" save-password="true" show-system-objects="true" read-only="false">
+		<connection host="pgsql.example.com" port="5432" server="" database="postgres" url="jdbc:postgresql://pgsql.example.com:5432/postgres" user="postgres" password="AwsVNEZRQQVl8w==" type="dev">
+			<property name="sslmode" value="verify-full"/>
+			<property name="ApplicationName" value="DBeaver"/>
+		</connection>
+	</data-source>
+</data-sources>
