@@ -102,6 +102,24 @@ host    all             all             ::/0                    md5
 '@ `
     | Out-File -Append -Encoding ascii "$dataPath\pg_hba.conf"
 
+# see https://www.postgresql.org/docs/9.6/static/libpq-ssl.html
+Write-Host 'Enabling ssl...'
+mkdir -Force "$env:APPDATA/postgresql" | Out-Null
+Copy-Item c:/vagrant/shared/pgsql-example-ca/pgsql-example-ca-crt.pem "$env:APPDATA/postgresql/root.crt"
+Copy-Item c:/vagrant/shared/pgsql-example-ca/pgsql.example.com-crt.pem "$dataPath/server.crt"
+Copy-Item c:/vagrant/shared/pgsql-example-ca/pgsql.example.com-key.pem "$dataPath/server.key"
+Set-Content -Encoding ascii "$dataPath\postgresql.conf" (
+    (Get-Content "$dataPath\postgresql.conf") `
+        -replace '^#?(ssl\s+.+?\s+).+','$1on' `
+        -replace '^#?(ssl_ciphers\s+.+?\s+).+','$1''HIGH:!aNULL'''
+)
+
+Write-Host 'Configuring the listen address...'
+Set-Content -Encoding ascii "$dataPath\postgresql.conf" (
+    (Get-Content "$dataPath\postgresql.conf") `
+        -replace '^#?(listen_addresses\s+.+?\s+).+','$1''0.0.0.0'''
+)
+
 Write-Host 'Creating the firewall rule to allow inbound TCP/IP access to the PostgreSQL port 5432...'
 New-NetFirewallRule `
     -Name 'POSTGRESQL-In-TCP' `

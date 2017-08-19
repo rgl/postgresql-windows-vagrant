@@ -6,7 +6,10 @@ class Example
     static void Main(string[] args)
     {
         // see http://www.npgsql.org/doc/connection-string-parameters.html
-        var connectionString = "Host=localhost; Port=5432; Username=postgres; Password=postgres; Database=postgres";
+        // see http://www.npgsql.org/doc/security.html
+        // NB npgsql uses the native windows Trusted Root Certification Authorities store to validate the server certificate.
+        var connectionString = "Host=pgsql.example.com; Port=5432; SSL Mode=Disable; Username=postgres; Password=postgres; Database=postgres";
+        var connectionStringSsl = connectionString.Replace("SSL Mode=Disable", "SSL Mode=Require");
 
         Console.WriteLine("PostgreSQL Version:");
         Console.WriteLine(SqlExecuteScalar(connectionString, "select version()"));
@@ -15,7 +18,10 @@ class Example
         Console.WriteLine(SqlExecuteScalar(connectionString, "select current_user"));
 
         Console.WriteLine("Is this PostgreSQL connection encrypted? (postgres; username/password credentials; non-encrypted TCP/IP connection):");
-        Console.WriteLine(SqlExecuteScalar(connectionString, "select ssl from pg_stat_ssl where pid=pg_backend_pid()"));
+        Console.WriteLine(SqlExecuteScalar(connectionString, "select case when ssl then concat('YES (', version, ')') else 'NO' end as ssl from pg_stat_ssl where pid=pg_backend_pid()"));
+
+        Console.WriteLine("Is this PostgreSQL connection encrypted? (postgres; username/password credentials; encrypted TCP/IP connection):");
+        Console.WriteLine(SqlExecuteScalar(connectionStringSsl, "select case when ssl then concat('YES (', version, ')') else 'NO' end as ssl from pg_stat_ssl where pid=pg_backend_pid()"));
     }
 
     private static object SqlExecuteScalar(string connectionString, string sql)
