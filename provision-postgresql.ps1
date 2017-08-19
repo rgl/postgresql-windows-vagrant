@@ -7,10 +7,9 @@ $env:PGUSER = 'postgres'
 $env:PGPASSWORD = 'postgres'
 
 $serviceHome = 'C:/pgsql'
-$serviceName = 'postgres'
-$serviceUsername = '.\postgres'
-$servicePassword = 'HeyH0Password'
-$serviceCredential = New-Object PSCredential $serviceUsername,(ConvertTo-SecureString $servicePassword -AsPlainText -Force)
+$serviceName = 'pgsql'
+$serviceUsername = "NT SERVICE\$serviceName"
+$dataPath = "$serviceHome/data"
 
 function initdb {
     &"$serviceHome/bin/initdb.exe" @Args
@@ -50,11 +49,22 @@ Move-Item "$serviceHome\pgsql\*" $serviceHome
 rmdir "$serviceHome\pgsql"
 Remove-Item $archivePath
 
-Write-Output "Creating the $serviceName local service account..."
-Install-User -Credential $serviceCredential
-Grant-Privilege $serviceUsername SeServiceLogonRight
+Write-Output "Installing the $serviceName service..."
+pg_ctl `
+    register `
+    -N $serviceName `
+    -D $dataPath `
+    -S auto `
+    -w
+$result = sc.exe sidtype $serviceName unrestricted
+if ($result -ne '[SC] ChangeServiceConfig2 SUCCESS') {
+    throw "sc.exe sidtype failed with $result"
+}
+$result = sc.exe config $serviceName obj= $serviceUsername
+if ($result -ne '[SC] ChangeServiceConfig SUCCESS') {
+    throw "sc.exe config failed with $result"
+}
 
-$dataPath = "$serviceHome/data"
 Write-Output "Initializing the database cluster at $dataPath..."
 mkdir $dataPath | Out-Null
 Disable-AclInheritance $dataPath
@@ -67,16 +77,6 @@ initdb `
     --encoding=UTF8 `
     --locale=en `
     -D $dataPath
-
-Write-Output "Installing the $serviceName service..."
-pg_ctl `
-    register `
-    -N $serviceName `
-    -U $serviceUsername `
-    -P $servicePassword `
-    -D $dataPath `
-    -S auto `
-    -w
 
 Write-Output "Starting the $serviceName service..."
 Start-Service $serviceName
