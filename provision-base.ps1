@@ -201,6 +201,10 @@ Install-ChocolateyShortcut `
     -ShortcutFilePath "C:\Users\All Users\Microsoft\Windows\Start Menu\Programs\pgAdmin 4.lnk" `
     -TargetPath 'C:\pgsql\pgAdmin 4\bin\pgAdmin4.exe' `
     -WorkingDirectory '%USERPROFILE%'
+# add DBeaver shortcut to the Desktop.
+Install-ChocolateyShortcut `
+    -ShortcutFilePath "$env:USERPROFILE\Desktop\DBeaver.lnk" `
+    -TargetPath 'C:\Program Files\DBeaver\dbeaver.exe'
 '@)
 New-Item -Path HKCU:Software\Microsoft\Windows\CurrentVersion\RunOnce -Force `
     | New-ItemProperty -Name ConfigureTaskbar -Value 'PowerShell -WindowStyle Hidden -File "%TEMP%\ConfigureTaskbar.ps1"' -PropertyType ExpandString `
