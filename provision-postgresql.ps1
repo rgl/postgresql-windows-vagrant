@@ -49,6 +49,20 @@ Move-Item "$serviceHome\pgsql\*" $serviceHome
 rmdir "$serviceHome\pgsql"
 Remove-Item $archivePath
 
+# see https://www.postgresql.org/docs/9.6/static/event-log-registration.html
+# see the available log names with:
+#       Get-WinEvent -ListLog * | Sort-Object LogName | Format-Table LogName
+# see the providers that write to a specific log with:
+#       (Get-WinEvent -ListLog Application).ProviderNames | Sort-Object
+#       (Get-WinEvent -ListLog Security).ProviderNames | Sort-Object
+# see the available provider names with:
+#       Get-WinEvent -ListProvider * | Sort-Object Name | Format-Table Name
+Write-Output 'Registering the PostgreSQL event log provider...'
+regsvr32.exe /s "$serviceHome\lib\pgevent.dll" | Out-String -Stream
+if ($LASTEXITCODE) {
+    throw "regsvr32.exe failed with exit code $LASTEXITCODE"
+}
+
 Write-Output "Installing the $serviceName service..."
 pg_ctl `
     register `
