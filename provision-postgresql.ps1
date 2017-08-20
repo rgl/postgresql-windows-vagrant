@@ -26,7 +26,7 @@ function pg_ctl {
 }
 
 function psql {
-    &"$serviceHome/bin/psql.exe" -w @Args
+    &"$serviceHome/bin/psql.exe" -v ON_ERROR_STOP=1 -w @Args
     if ($LASTEXITCODE) {
         throw "failed with exit code $LASTEXITCODE"
     }
