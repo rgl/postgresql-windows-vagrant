@@ -1,8 +1,16 @@
 # install dependencies.
+# NB you can see which version of MSVC++ was used to compile
+#    postgres by running:
+#       psql -c 'select version()' postgres
+#    which returns something like:
+#       PostgreSQL 10.0, compiled by Visual C++ build 1800, 64-bit
+#    that build 1800 is for:
+#       MSVC++ 12.0 _MSC_VER == 1800 (Visual Studio 2013).
+#    see https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
 choco install -y vcredist2013
 
 # the default postgres superuser username and password.
-# see https://www.postgresql.org/docs/9.6/static/libpq-envars.html
+# see https://www.postgresql.org/docs/10/static/libpq-envars.html
 $env:PGUSER = 'postgres'
 $env:PGPASSWORD = 'postgres'
 
@@ -33,8 +41,8 @@ function psql {
 }
 
 # download and install binaries.
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-9.6.5-1-windows-x64-binaries.zip'
-$archiveHash = '42f40bfb1955a0823c0f42976e22cc2eec9215474308ef12dfaf8d19eac1c82b'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-10.0-1-windows-x64-binaries.zip'
+$archiveHash = '0f788762993091e43a32ed1c20265acca98baeb3beeaad19ecb8329c771dcfce'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
@@ -49,7 +57,7 @@ Move-Item "$serviceHome\pgsql\*" $serviceHome
 rmdir "$serviceHome\pgsql"
 Remove-Item $archivePath
 
-# see https://www.postgresql.org/docs/9.6/static/event-log-registration.html
+# see https://www.postgresql.org/docs/10/static/event-log-registration.html
 # see the available log names with:
 #       Get-WinEvent -ListLog * | Sort-Object LogName | Format-Table LogName
 # see the providers that write to a specific log with:
@@ -116,7 +124,7 @@ host    all             all             ::/0                    md5
 '@ `
     | Out-File -Append -Encoding ascii "$dataPath\pg_hba.conf"
 
-# see https://www.postgresql.org/docs/9.6/static/libpq-ssl.html
+# see https://www.postgresql.org/docs/10/static/libpq-ssl.html
 Write-Host 'Enabling ssl...'
 mkdir -Force "$env:APPDATA/postgresql" | Out-Null
 Copy-Item c:/vagrant/shared/pgsql-example-ca/pgsql-example-ca-crt.pem "$env:APPDATA/postgresql/root.crt"
@@ -151,7 +159,7 @@ Write-Output 'Installing the adminpack extension...'
 psql -c 'create extension adminpack' postgres
 
 Write-Output 'Showing pg version, connection information, users and databases...'
-# see https://www.postgresql.org/docs/9.6/static/functions-info.html
+# see https://www.postgresql.org/docs/10/static/functions-info.html
 psql -c 'select version()' postgres
 psql -c 'select current_user, current_database(), inet_client_addr(), inet_client_port(), inet_server_addr(), inet_server_port(), pg_backend_pid(), pg_postmaster_start_time()' postgres
 psql -c '\du' postgres
