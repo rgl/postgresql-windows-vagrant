@@ -33,8 +33,8 @@ function psql {
 }
 
 # download and install binaries.
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-9.6.4-1-windows-x64-binaries.zip'
-$archiveHash = '15a963bd02f54fca9049c9270455d1d74f22674e921a3805b211695fd1a18c3e'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-9.6.5-1-windows-x64-binaries.zip'
+$archiveHash = '42f40bfb1955a0823c0f42976e22cc2eec9215474308ef12dfaf8d19eac1c82b'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
