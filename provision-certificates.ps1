@@ -5,8 +5,8 @@ choco install -y openssl.light
 Import-Module C:\ProgramData\chocolatey\helpers\chocolateyInstaller.psm1
 Update-SessionEnvironment
 
-$caDirectory = "c:\vagrant\shared\pgsql-example-ca"
-$caPathPrefix = "$caDirectory\pgsql-example-ca"
+$caDirectory = "c:\vagrant\shared\postgresql-example-ca"
+$caPathPrefix = "$caDirectory\postgresql-example-ca"
 $caCommonName = 'PostgreSQL Example CA'
 
 function openssl {
@@ -122,4 +122,4 @@ Import-Certificate `
     -CertStoreLocation Cert:\LocalMachine\Root `
     | Out-Null
 
-New-ServerCertificate 'pgsql.example.com'
+New-ServerCertificate 'postgresql.example.com'

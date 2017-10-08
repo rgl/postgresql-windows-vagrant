@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class Example {
     public static void main(String[] args) throws Exception {
-        String connectionString = "jdbc:postgresql://pgsql.example.com:5432/postgres?sslmode=disable&user=postgres&password=postgres";
+        String connectionString = "jdbc:postgresql://postgresql.example.com:5432/postgres?sslmode=disable&user=postgres&password=postgres";
         String connectionStringSsl = connectionString.replace("sslmode=disable", "sslmode=verify-full");
 
         System.out.println("PostgreSQL Version:");

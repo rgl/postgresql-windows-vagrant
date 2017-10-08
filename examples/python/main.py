@@ -9,7 +9,7 @@ def sql_execute_scalar(data_source_name, sql):
             cursor.execute(sql)
             return cursor.fetchone()[0]
 
-data_source_name = 'host=pgsql.example.com port=5432 sslmode=disable user=postgres password=postgres dbname=postgres'
+data_source_name = 'host=postgresql.example.com port=5432 sslmode=disable user=postgres password=postgres dbname=postgres'
 data_source_name_ssl = data_source_name.replace('sslmode=disable', 'sslmode=verify-full')
 
 print('PostgreSQL Version:')

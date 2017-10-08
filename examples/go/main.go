@@ -33,7 +33,7 @@ func sqlExecuteScalar(dataSourceName string, sqlStatement string) string {
 
 // NB go uses the native windows Trusted Root Certification Authorities store to validate the server certificate.
 func main() {
-	dataSourceName := "host=pgsql.example.com port=5432 sslmode=disable user=postgres password=postgres dbname=postgres"
+	dataSourceName := "host=postgresql.example.com port=5432 sslmode=disable user=postgres password=postgres dbname=postgres"
 	dataSourceNameSsl := strings.Replace(dataSourceName, "sslmode=disable", "sslmode=verify-full", -1)
 
 	fmt.Println("PostgreSQL Version:")

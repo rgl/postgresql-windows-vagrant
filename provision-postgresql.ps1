@@ -14,8 +14,8 @@ choco install -y vcredist2013
 $env:PGUSER = 'postgres'
 $env:PGPASSWORD = 'postgres'
 
-$serviceHome = 'C:/pgsql'
-$serviceName = 'pgsql'
+$serviceHome = 'C:/postgresql'
+$serviceName = 'postgresql'
 $serviceUsername = "NT SERVICE\$serviceName"
 $dataPath = "$serviceHome/data"
 
@@ -127,9 +127,9 @@ host    all             all             ::/0                    md5
 # see https://www.postgresql.org/docs/10/static/libpq-ssl.html
 Write-Host 'Enabling ssl...'
 mkdir -Force "$env:APPDATA/postgresql" | Out-Null
-Copy-Item c:/vagrant/shared/pgsql-example-ca/pgsql-example-ca-crt.pem "$env:APPDATA/postgresql/root.crt"
-Copy-Item c:/vagrant/shared/pgsql-example-ca/pgsql.example.com-crt.pem "$dataPath/server.crt"
-Copy-Item c:/vagrant/shared/pgsql-example-ca/pgsql.example.com-key.pem "$dataPath/server.key"
+Copy-Item c:/vagrant/shared/postgresql-example-ca/postgresql-example-ca-crt.pem "$env:APPDATA/postgresql/root.crt"
+Copy-Item c:/vagrant/shared/postgresql-example-ca/postgresql.example.com-crt.pem "$dataPath/server.crt"
+Copy-Item c:/vagrant/shared/postgresql-example-ca/postgresql.example.com-key.pem "$dataPath/server.key"
 Set-Content -Encoding ascii "$dataPath\postgresql.conf" (
     (Get-Content "$dataPath\postgresql.conf") `
         -replace '^#?(ssl\s+.+?\s+).+','$1on' `
