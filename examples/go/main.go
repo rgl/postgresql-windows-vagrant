@@ -39,6 +39,9 @@ func main() {
 	fmt.Println("PostgreSQL Version:")
 	fmt.Println(sqlExecuteScalar(dataSourceName, "select version()"))
 
+	fmt.Println("PostgreSQL Version:")
+	fmt.Println(sqlExecuteScalar(dataSourceName, "show server_version"))
+
 	fmt.Println("PostgreSQL User Name (postgres; username/password credentials; non-encrypted TCP/IP connection):")
 	fmt.Println(sqlExecuteScalar(dataSourceName, "select current_user"))
 

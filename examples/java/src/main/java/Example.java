@@ -14,6 +14,9 @@ public class Example {
         System.out.println("PostgreSQL Version:");
         System.out.println(queryScalar(connectionString, "select version()"));
 
+        System.out.println("PostgreSQL Version:");
+        System.out.println(queryScalar(connectionString, "show server_version"));
+
         System.out.println("PostgreSQL User Name (postgres; username/password credentials; non-encrypted TCP/IP connection):");
         System.out.println(queryScalar(connectionString, "select current_user"));
 

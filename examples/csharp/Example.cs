@@ -14,6 +14,9 @@ class Example
         Console.WriteLine("PostgreSQL Version:");
         Console.WriteLine(SqlExecuteScalar(connectionString, "select version()"));
 
+        Console.WriteLine("PostgreSQL Version:");
+        Console.WriteLine(SqlExecuteScalar(connectionString, "show server_version"));
+
         Console.WriteLine("PostgreSQL User Name (postgres; username/password credentials; non-encrypted TCP/IP connection):");
         Console.WriteLine(SqlExecuteScalar(connectionString, "select current_user"));
 

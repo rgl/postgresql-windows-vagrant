@@ -15,6 +15,9 @@ data_source_name_ssl = data_source_name.replace('sslmode=disable', 'sslmode=veri
 print('PostgreSQL Version:')
 print(sql_execute_scalar(data_source_name, 'select version()'))
 
+print('PostgreSQL Version:')
+print(sql_execute_scalar(data_source_name, 'show server_version'))
+
 print('PostgreSQL User Name (postgres; username/password credentials; non-encrypted TCP/IP connection):')
 print(sql_execute_scalar(data_source_name, 'select current_user'))
 
