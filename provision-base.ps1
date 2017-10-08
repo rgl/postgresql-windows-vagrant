@@ -206,6 +206,13 @@ Install-ChocolateyShortcut `
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\DBeaver.lnk" `
     -TargetPath 'C:\Program Files\DBeaver\dbeaver.exe'
+# add the postgres_exporter shortcut to the Desktop.
+[IO.File]::WriteAllText(
+    "$env:USERPROFILE\Desktop\Postgres Exporter.url",
+    @"
+[InternetShortcut]
+URL=http://localhost:9187/metrics
+"@)
 '@)
 New-Item -Path HKCU:Software\Microsoft\Windows\CurrentVersion\RunOnce -Force `
     | New-ItemProperty -Name ConfigureTaskbar -Value 'PowerShell -WindowStyle Hidden -File "%TEMP%\ConfigureTaskbar.ps1"' -PropertyType ExpandString `
