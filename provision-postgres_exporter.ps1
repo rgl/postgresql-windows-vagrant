@@ -1,70 +1,28 @@
-# install go.
-choco install -y golang
-$env:GOROOT = 'C:\tools\go'
-$env:PATH += ";$env:GOROOT\bin"
-
-# converts/escapes a string to a command line argument.
-function ConvertTo-CommandLineArgument {
-    # Normally, an Windows application (.NET applications too) parses
-    # their command line using the CommandLineToArgvW function. Which has
-    # some peculiar rules.
-    # See http://msdn.microsoft.com/en-us/library/bb776391(VS.85).aspx
-    #
-    # TODO how about backslashes? there seems to be a weird interaction
-    #      between backslahses and double quotes...
-    process {
-        if ($_.Contains('"')) {
-            # escape single double quotes with another double quote.
-            return '"{0}"' -f $_.Replace('"', '""')
-        } elseif ($_.Contains(' ')) { # AND it does NOT contain double quotes! (those were catched in the previous test)
-            return '"{0}"' -f $_
-        } elseif ($_ -eq '') {
-            return '""'
-        } else {
-            return $_
-        }
-    }
-}
-function Start-WrappedProcess([string]$ProcessPath, [string[]]$Arguments, [int[]]$SuccessExitCodes=@(0)) {
-    $p = Start-Process $ProcessPath ($Arguments | ConvertTo-CommandLineArgument) `
-        -RedirectStandardOutput $env:TEMP\stdout.txt `
-        -RedirectStandardError $env:TEMP\stderr.txt `
-        -WindowStyle Hidden `
-        -Wait `
-        -PassThru
-    Write-Output (Get-Content $env:TEMP\stdout.txt,$env:TEMP\stderr.txt)
-    Remove-Item $env:TEMP\stdout.txt,$env:TEMP\stderr.txt
-    if ($SuccessExitCodes -NotContains $p.ExitCode) {
-        throw "$(@($ProcessPath)+$Arguments | ConvertTo-Json -Compress) failed with exit code $LASTEXITCODE"
-    }
-}
-function git {
-    Start-WrappedProcess git $Args
-}
-function go {
-    Start-WrappedProcess go $Args
-}
-
-# build postgres_exporter from source code.
-# see https://github.com/wrouesnel/postgres_exporter/blob/master/Makefile
-Push-Location $env:TEMP
-mkdir postgres_exporter/src | Out-Null
-cd postgres_exporter
-$env:GOPATH = $PWD.Path
-cd src
-git clone -b master https://github.com/rgl/postgres_exporter.git
-cd postgres_exporter
-go build -v -ldflags "-extldflags -static -X main.Version=$(git describe --dirty)"
-del env:GOPATH
-Pop-Location
-
 $serviceHome = 'C:/postgres_exporter'
 $serviceName = 'postgres_exporter'
 $serviceUsername = "NT SERVICE\$serviceName"
 
-# install the binary.
+# download and install.
+$archiveUrl = 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.4.1/postgres_exporter_v0.4.1_windows-amd64.tar.gz'
+$archiveHash = '9fa9068458998394623e1cda3d32198d798b0ccbd3fa930589baeecf9f9fadca'
+$archiveName = Split-Path $archiveUrl -Leaf
+$archiveTarName = $archiveName -replace '\.gz',''
+$archivePath = "$env:TEMP\$archiveName"
+(New-Object Net.WebClient).DownloadFile($archiveUrl, $archivePath)
+$archiveActualHash = (Get-FileHash $archivePath -Algorithm SHA256).Hash
+if ($archiveHash -ne $archiveActualHash) {
+    throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
+}
 mkdir $serviceHome | Out-Null
-Copy-Item "$env:TEMP/postgres_exporter/src/postgres_exporter/postgres_exporter.exe" $serviceHome
+Import-Module C:\ProgramData\chocolatey\helpers\chocolateyInstaller.psm1
+Get-ChocolateyUnzip -FileFullPath $archivePath -Destination $serviceHome
+Get-ChocolateyUnzip -FileFullPath $serviceHome\$archiveTarName -Destination $serviceHome
+Remove-Item $serviceHome\$archiveTarName
+$archiveTempPath = Resolve-Path $serviceHome\postgres_exporter_*
+Move-Item $archiveTempPath\* $serviceHome
+Move-Item $serviceHome\postgres_exporter $serviceHome\postgres_exporter.exe
+Remove-Item $archiveTempPath
+Remove-Item $archivePath
 
 # install the service.
 choco install -y nssm
@@ -119,7 +77,7 @@ nssm set $serviceName AppRotateBytes 1048576
 nssm set $serviceName AppStdout $serviceHome\logs\service.log
 nssm set $serviceName AppStderr $serviceHome\logs\service.log
 nssm set $serviceName AppParameters `
-    '-web.listen-address=localhost:9187'
+    '--web.listen-address=localhost:9187'
 nssm set $serviceName AppEnvironmentExtra `
     'DATA_SOURCE_NAME=postgres://postgres:postgres@localhost?sslmode=disable'
 
