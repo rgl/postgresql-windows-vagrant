@@ -1,0 +1,11 @@
+{
+    "name": "star-trek-characters-scraper",
+    "version": "1.0.0",
+    "description": "get star trek characters",
+    "main": "main.js",
+    "author": "Rui Lopes <rgl@ruilopes.com>",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "puppeteer": "^0.13.0"
+    }
+}

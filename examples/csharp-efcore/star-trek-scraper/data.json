@@ -1,0 +1,358 @@
+{
+    "Star Trek: The Original Series": [
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/James_T._Kirk",
+            "name": "James T. Kirk",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Spock",
+            "name": "Spock",
+            "gender": "male",
+            "species": "Vulcan/Human hybrid"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Leonard_McCoy",
+            "name": "Leonard McCoy",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Montgomery_Scott",
+            "name": "Montgomery Scott",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Hikaru_Sulu",
+            "name": "Hikaru Sulu",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Pavel_Chekov",
+            "name": "Pavel Chekov",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Nyota_Uhura",
+            "name": "Nyota Uhura",
+            "gender": "female",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Christine_Chapel",
+            "name": "Christine Chapel",
+            "gender": "female",
+            "species": "Human"
+        }
+    ],
+    "Star Trek: The Animated Series": [
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/James_T._Kirk",
+            "name": "James T. Kirk",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Spock",
+            "name": "Spock",
+            "gender": "male",
+            "species": "Vulcan/Human hybrid"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Leonard_McCoy",
+            "name": "Leonard McCoy",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Montgomery_Scott",
+            "name": "Montgomery Scott",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Hikaru_Sulu",
+            "name": "Hikaru Sulu",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Nyota_Uhura",
+            "name": "Nyota Uhura",
+            "gender": "female",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Christine_Chapel",
+            "name": "Christine Chapel",
+            "gender": "female",
+            "species": "Human"
+        }
+    ],
+    "Star Trek: The Next Generation": [
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Jean-Luc_Picard",
+            "name": "Jean-Luc Picard",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/William_T._Riker",
+            "name": "William T. Riker",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Data",
+            "name": "Data",
+            "gender": "male",
+            "species": "Soong-type android"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Geordi_La_Forge",
+            "name": "Geordi La Forge",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Worf",
+            "name": "Worf",
+            "gender": "male",
+            "species": "Klingon"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Beverly_Crusher",
+            "name": "Beverly Crusher",
+            "gender": "female",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Deanna_Troi",
+            "name": "Deanna Troi",
+            "gender": "female",
+            "species": "½ Human\n½ Betazoid"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Natasha_Yar",
+            "name": "Natasha Yar",
+            "gender": "female",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Wesley_Crusher",
+            "name": "Wesley Crusher",
+            "gender": "male",
+            "species": "Human"
+        }
+    ],
+    "Star Trek: Deep Space Nine": [
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Benjamin_Sisko",
+            "name": "Benjamin Sisko",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Kira_Nerys",
+            "name": "Kira Nerys",
+            "gender": "female",
+            "species": "Bajoran"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Odo",
+            "name": "Odo",
+            "gender": "none (male in appearance)\nmale (while human)",
+            "species": "Changeling\nHuman (late-2372 to mid-2373)"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Worf",
+            "name": "Worf",
+            "gender": "male",
+            "species": "Klingon"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Jadzia_Dax",
+            "name": "Jadzia Dax",
+            "gender": "female",
+            "species": "Trill (joined)"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Julian_Bashir",
+            "name": "Julian Bashir",
+            "gender": "male",
+            "species": "Post-Eugenics Human Augment"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Miles_O%27Brien",
+            "name": "Miles O'Brien",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Ezri_Dax",
+            "name": "Ezri Dax",
+            "gender": "female",
+            "species": "Trill (joined)"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Quark",
+            "name": "Quark",
+            "gender": "male",
+            "species": "Ferengi"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Jake_Sisko",
+            "name": "Jake Sisko",
+            "gender": "male",
+            "species": "Human"
+        }
+    ],
+    "Star Trek: Voyager": [
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Kathryn_Janeway",
+            "name": "Kathryn Janeway",
+            "gender": "female",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Chakotay",
+            "name": "Chakotay",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Tuvok",
+            "name": "Tuvok",
+            "gender": "male",
+            "species": "Vulcan"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Tom_Paris",
+            "name": "Tom Paris",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/B%27Elanna_Torres",
+            "name": "B'Elanna Torres",
+            "gender": "female",
+            "species": "½ Klingon (mother) \n½ Human (father)"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Harry_Kim",
+            "name": "Harry Kim",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Seven_of_Nine",
+            "name": "Seven of Nine",
+            "gender": "female",
+            "species": "Human, former Borg drone"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/The_Doctor",
+            "name": "The Doctor",
+            "gender": null,
+            "species": "Hologram"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Neelix",
+            "name": "Neelix",
+            "gender": "male",
+            "species": "Talaxian (⅛th Mylean)"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Kes",
+            "name": "Kes",
+            "gender": "female",
+            "species": "Ocampa"
+        }
+    ],
+    "Star Trek: Enterprise": [
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Jonathan_Archer",
+            "name": "Jonathan Archer",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/T%27Pol",
+            "name": "T'Pol",
+            "gender": "female",
+            "species": "Vulcan"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Charles_Tucker_III",
+            "name": "Charles Tucker III",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Malcolm_Reed",
+            "name": "Malcolm Reed",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Travis_Mayweather",
+            "name": "Travis Mayweather",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Hoshi_Sato",
+            "name": "Hoshi Sato",
+            "gender": "female",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Phlox",
+            "name": "Phlox",
+            "gender": "male",
+            "species": "Denobulan"
+        }
+    ],
+    "Star Trek: Discovery": [
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Michael_Burnham",
+            "name": "Michael Burnham",
+            "gender": "female",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Saru",
+            "name": "Saru",
+            "gender": "male",
+            "species": "Kelpien"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Ash_Tyler",
+            "name": "Ash Tyler",
+            "gender": "male",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Paul_Stamets",
+            "name": "Paul Stamets",
+            "gender": "male",
+            "species": "Human (augmented with tardigrade DNA)"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Sylvia_Tilly",
+            "name": "Sylvia Tilly",
+            "gender": "female",
+            "species": "Human"
+        },
+        {
+            "url": "http://memory-alpha.wikia.com/wiki/Gabriel_Lorca",
+            "name": "Gabriel Lorca",
+            "gender": "male",
+            "species": "Human"
+        }
+    ]
+}
