@@ -3,7 +3,7 @@
 // see http://imperceptiblethoughts.com/shadow/
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '2.0.1'
+    id 'com.github.johnrengelman.shadow' version '2.0.2'
 }
 
 apply plugin: 'application'
