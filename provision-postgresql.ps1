@@ -3,7 +3,7 @@
 #    postgres by running:
 #       psql -c 'select version()' postgres
 #    which returns something like:
-#       PostgreSQL 10.0, compiled by Visual C++ build 1800, 64-bit
+#       PostgreSQL 10.1, compiled by Visual C++ build 1800, 64-bit
 #    that build 1800 is for:
 #       MSVC++ 12.0 _MSC_VER == 1800 (Visual Studio 2013).
 #    see https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
@@ -41,12 +41,12 @@ function psql {
 }
 
 # download and install binaries.
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-10.0-1-windows-x64-binaries.zip'
-$archiveHash = '0f788762993091e43a32ed1c20265acca98baeb3beeaad19ecb8329c771dcfce'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-10.1-3-windows-x64-binaries.zip'
+$archiveHash = '62dee5ce95e2e713433e0c50b8c9e872b560c08f527b8c3b538a2c53ede34e09'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
-Invoke-WebRequest $archiveUrl -UseBasicParsing -OutFile $archivePath
+(New-Object Net.WebClient).DownloadFile($archiveUrl, $archivePath)
 $archiveActualHash = (Get-FileHash $archivePath -Algorithm SHA256).Hash
 if ($archiveHash -ne $archiveActualHash) {
     throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
