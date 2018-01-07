@@ -11,9 +11,10 @@ using System;
 namespace Example.Migrations
 {
     [DbContext(typeof(StarTrekContext))]
-    partial class StarTrekContextModelSnapshot : ModelSnapshot
+    [Migration("20180107094036_AddCharacterPhoto")]
+    partial class AddCharacterPhoto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

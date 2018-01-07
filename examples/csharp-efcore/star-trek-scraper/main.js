@@ -3,6 +3,7 @@
 const CHARACTERS_URL = "http://memory-alpha.wikia.com/wiki/Main_characters";
 
 const puppeteer = require("puppeteer");
+const https = require("https");
 const { URL } = require("url");
 const fs = require("fs");
 
@@ -45,12 +46,13 @@ async function getCharacter(page, url) {
 
     await page.goto(url);
 
-    return await page.evaluate(url => {
+    const data = await page.evaluate(url => {
         var data = {
             url: url,
             name: document.querySelector("h1.page-header__title").innerText,
             gender: null,
             species: null,
+            photoUrl: document.querySelector("#mw-content-text aside.portable-infobox figure img").src,
         };
         const infoBoxEl = document.querySelector("#mw-content-text aside.portable-infobox");
         for (const dataEl of infoBoxEl.querySelectorAll(".pi-data")) {
@@ -66,6 +68,36 @@ async function getCharacter(page, url) {
         }
         return data;
     }, url);
+
+    return {
+        url: data.url,
+        name: data.name,
+        gender: data.gender,
+        species: data.species,
+        photo: (await downloadPhoto(data.photoUrl)).toString("base64"),
+    };
+}
+
+function downloadPhoto(url) {
+    return new Promise((resolve, reject) => {
+        console.log("downloading photo from", url);
+        https.get(
+            url,
+            response => {
+                if (response.statusCode != 200) {
+                    reject(new Error("Unexpected statusCode " + response.statusCode));
+                }
+                const contentType = response.headers["content-type"];
+                if (contentType.indexOf("image/")) {
+                    reject(new Error("Unexpected contentType " + contentType));
+                }
+                var photo = Buffer.from([]);
+                response
+                    .on("data", chunk => photo = Buffer.concat([photo, chunk]))
+                    .on("end", () => resolve(photo));
+            }
+        );
+    });
 }
 
 async function main() {

@@ -15,6 +15,7 @@ namespace Example
         public string Name { get; set; }
         public string Gender { get; set; }
         public string Species { get; set; }
+        public string Photo { get; set; }
     }
 
     public class Series
@@ -42,6 +43,19 @@ namespace Example
 
         [Required]
         public Series Series { get; set; }
+
+        public CharacterPhoto Photo { get; set; }
+    }
+
+    public class CharacterPhoto
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public Character Character { get; set; }
+
+        [Required]
+        public byte[] Photo { get; set; }
     }
 
     public class StarTrekContext : DbContext
@@ -64,6 +78,7 @@ namespace Example
 
     // this is used when you run a design-time command, e.g.:
     //      dotnet ef migrations add InitialCreate
+    //      dotnet ef migrations add AddCharacterPhoto
     //      dotnet ef database update
     // see https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dbcontext-creation
     public class StarTrekContextFactory : IDesignTimeDbContextFactory<StarTrekContext>
@@ -117,6 +132,7 @@ namespace Example
                                     Name = c.Name,
                                     Gender = c.Gender,
                                     Species = c.Species,
+                                    Photo = new CharacterPhoto { Photo = Convert.FromBase64String(c.Photo) },
                                 }
                             );
                         }
