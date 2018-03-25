@@ -28,5 +28,5 @@ repositories {
 }
 
 dependencies {
-    compile 'org.postgresql:postgresql:42.1.4'
+    compile 'org.postgresql:postgresql:42.2.2'
 }

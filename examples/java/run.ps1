@@ -7,7 +7,9 @@ Update-SessionEnvironment
 
 # build into a fat jar.
 # NB gradle build would also work, but having a fat jar is nicier for distribution.
-gradle shadowJar
+Write-Output 'Building the example...'
+gradle clean shadowJar
 
 # run the example.
+Write-Output 'Executing the example...'
 java -jar build/libs/example-1.0.0-all.jar
