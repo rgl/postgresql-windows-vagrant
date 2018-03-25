@@ -3,7 +3,7 @@
 #    postgres by running:
 #       psql -c 'select version()' postgres
 #    which returns something like:
-#       PostgreSQL 10.1, compiled by Visual C++ build 1800, 64-bit
+#       PostgreSQL 10.3, compiled by Visual C++ build 1800, 64-bit
 #    that build 1800 is for:
 #       MSVC++ 12.0 _MSC_VER == 1800 (Visual Studio 2013).
 #    see https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
@@ -41,8 +41,9 @@ function psql {
 }
 
 # download and install binaries.
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-10.1-3-windows-x64-binaries.zip'
-$archiveHash = '62dee5ce95e2e713433e0c50b8c9e872b560c08f527b8c3b538a2c53ede34e09'
+# see https://www.enterprisedb.com/download-postgresql-binaries
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-10.3-1-windows-x64-binaries.zip'
+$archiveHash = '9e5cc5c4d8d368042f5e3ad3a2e8a530a8d9ae9e61354ff3dece6462eccfac00'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
