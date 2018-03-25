@@ -3,10 +3,9 @@ $serviceName = 'postgres_exporter'
 $serviceUsername = "NT SERVICE\$serviceName"
 
 # download and install.
-$archiveUrl = 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.4.1/postgres_exporter_v0.4.1_windows-amd64.tar.gz'
-$archiveHash = '9fa9068458998394623e1cda3d32198d798b0ccbd3fa930589baeecf9f9fadca'
+$archiveUrl = 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.4.5/postgres_exporter_v0.4.5_windows-amd64.zip'
+$archiveHash = '9460409da9efe682bf609b95510e7bae24af07b0bbd2ef98d1153ac2cce33793'
 $archiveName = Split-Path $archiveUrl -Leaf
-$archiveTarName = $archiveName -replace '\.gz',''
 $archivePath = "$env:TEMP\$archiveName"
 (New-Object Net.WebClient).DownloadFile($archiveUrl, $archivePath)
 $archiveActualHash = (Get-FileHash $archivePath -Algorithm SHA256).Hash
@@ -14,13 +13,9 @@ if ($archiveHash -ne $archiveActualHash) {
     throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
 }
 mkdir $serviceHome | Out-Null
-Import-Module C:\ProgramData\chocolatey\helpers\chocolateyInstaller.psm1
-Get-ChocolateyUnzip -FileFullPath $archivePath -Destination $serviceHome
-Get-ChocolateyUnzip -FileFullPath $serviceHome\$archiveTarName -Destination $serviceHome
-Remove-Item $serviceHome\$archiveTarName
+Expand-Archive $archivePath $serviceHome
 $archiveTempPath = Resolve-Path $serviceHome\postgres_exporter_*
 Move-Item $archiveTempPath\* $serviceHome
-Move-Item $serviceHome\postgres_exporter $serviceHome\postgres_exporter.exe
 Remove-Item $archiveTempPath
 Remove-Item $archivePath
 
