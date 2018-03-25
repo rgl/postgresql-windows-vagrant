@@ -101,18 +101,21 @@ function downloadPhoto(url) {
 }
 
 async function main() {
-    const browser = await puppeteer.launch();
+    console.log("launching...");
+    const browser = await puppeteer.launch({headless: true});
     try {
-        const page = await browser.newPage();
-
+        console.log("getting the browser version...");
         console.log("running under", await browser.version());
 
-        // lower the needed bandwidth to scrape the site.
+        console.log("creating a new browser page...");
+        const page = await browser.newPage();
+
+        console.log("lowering the needed bandwidth to scrape the site...");
         await page.setRequestInterception(true);
         page.on(
             "request",
             request => {
-                if (request.resourceType === "document") {
+                if (request.resourceType() === "document") {
                     request.continue();
                 } else {
                     request.abort();
