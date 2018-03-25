@@ -193,15 +193,10 @@ Install-ChocolateyShortcut `
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\Services.lnk" `
     -TargetPath 'C:\Windows\System32\services.msc'
-# add pgAdmin 4 shortcut to the Desktop and Start Menu.
+# add pgAdmin 4 shortcut to the Desktop.
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\pgAdmin 4.lnk" `
-    -TargetPath 'C:\postgresql\pgAdmin 4\bin\pgAdmin4.exe' `
-    -WorkingDirectory '%USERPROFILE%'
-Install-ChocolateyShortcut `
-    -ShortcutFilePath "C:\Users\All Users\Microsoft\Windows\Start Menu\Programs\pgAdmin 4.lnk" `
-    -TargetPath 'C:\postgresql\pgAdmin 4\bin\pgAdmin4.exe' `
-    -WorkingDirectory '%USERPROFILE%'
+    -TargetPath 'C:\Program Files (x86)\pgAdmin 4\v2\runtime\pgAdmin4.exe'
 # add DBeaver shortcut to the Desktop.
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\DBeaver.lnk" `
