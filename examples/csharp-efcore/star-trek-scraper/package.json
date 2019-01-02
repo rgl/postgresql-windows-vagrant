@@ -6,6 +6,6 @@
     "author": "Rui Lopes <rgl@ruilopes.com>",
     "license": "GPL-3.0",
     "dependencies": {
-        "puppeteer": "^1.2.0"
+        "puppeteer": "^1.11.0"
     }
 }
