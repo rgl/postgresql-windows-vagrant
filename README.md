@@ -1,8 +1,8 @@
-This is a [PostgreSQL](https://www.postgresql.org/) on Windows Server 2016 Vagrant environment playground.
+This is a [PostgreSQL](https://www.postgresql.org/) on Windows Server 2019 Vagrant environment playground.
 
 # Usage
 
-Install the [Base Windows Box](https://github.com/rgl/windows-2016-vagrant).
+Install the [Base Windows 2019 Box](https://github.com/rgl/windows-2016-vagrant).
 
 Then launch the environment:
 
