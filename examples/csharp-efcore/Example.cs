@@ -74,6 +74,17 @@ namespace Example
         {
             optionsBuilder.UseNpgsql(_connectionString);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // NB while upgrading to ef-core 2.1 we noticed that this one-to-one mapping
+            //    was not really ideal, but for data backward-compatibility, we leave it
+            //    as it was originally.
+            modelBuilder.Entity<CharacterPhoto>()
+                .HasOne(cp => cp.Character)
+                .WithOne(c => c.Photo)
+                .HasForeignKey<Character>("PhotoId");
+        }
     }
 
     // this is used when you run a design-time command, e.g.:
