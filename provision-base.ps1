@@ -122,16 +122,6 @@ git config --global mergetool.meld.path 'C:/Program Files (x86)/Meld/Meld.exe'
 git config --global mergetool.meld.cmd '\"C:/Program Files (x86)/Meld/Meld.exe\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" --auto-merge --output \"$MERGED\"'
 #git config --list --show-origin
 
-# install classic shell.
-New-Item -Path HKCU:Software\IvoSoft\ClassicStartMenu -Force `
-    | New-ItemProperty -Name ShowedStyle2      -Value 1 -PropertyType DWORD `
-    | Out-Null
-New-Item -Path HKCU:Software\IvoSoft\ClassicStartMenu\Settings -Force `
-    | New-ItemProperty -Name EnableStartButton -Value 1 -PropertyType DWORD `
-    | New-ItemProperty -Name SkipMetro         -Value 1 -PropertyType DWORD `
-    | Out-Null
-choco install -y classic-shell -installArgs ADDLOCAL=ClassicStartMenu
-
 # install Google Chrome.
 # see https://www.chromium.org/administrators/configuring-other-preferences
 choco install -y googlechrome
