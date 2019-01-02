@@ -2,7 +2,7 @@
 choco install -y golang
 
 # setup the current process environment.
-$env:GOROOT = 'C:\tools\go'
+$env:GOROOT = 'C:\Go'
 $env:PATH += ";$env:GOROOT\bin"
 
 # setup the Machine environment.
