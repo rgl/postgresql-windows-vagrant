@@ -1,14 +1,20 @@
 # install the PostgreSQL JDBC driver.
-$archiveUrl = 'http://central.maven.org/maven2/org/postgresql/postgresql/42.2.2/postgresql-42.2.2.jar'
-$archiveHash = '1996524026a3027853f3932e8639ef813807d1b63fe14832f410fffa4274fa70'
-$archiveName = Split-Path -Leaf $archiveUrl
-$archivePath = "$env:USERPROFILE\.dbeaver-drivers\$archiveName"
-Write-Host "Downloading $archiveName..."
-mkdir -Force (Split-Path -Parent $archivePath) | Out-Null
-Invoke-WebRequest $archiveUrl -UseBasicParsing -OutFile $archivePath
-$archiveActualHash = (Get-FileHash $archivePath -Algorithm SHA256).Hash
-if ($archiveHash -ne $archiveActualHash) {
-    throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
+@(
+    ,@('http://central.maven.org/maven2/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar', '7ffa46f8c619377cdebcd17721b6b21ecf6659850179f96fec3d1035cf5a0cdc')
+    ,@('http://central.maven.org/maven2/net/postgis/postgis-jdbc/2.2.1/postgis-jdbc-2.2.1.jar', '8bb36080e752257b8547402090b5d05e54dd89fc0814bd299e14ccab8d31715c')
+    ,@('http://central.maven.org/maven2/net/postgis/postgis-jdbc-jtsparser/2.2.1/postgis-jdbc-jtsparser-2.2.1.jar', '60ad4b9959ac54ac419b4db278004a98fb821209b889bba752f543bf90edd1fc')
+) | ForEach-Object {
+    $archiveUrl = $_[0]
+    $archiveHash = $_[1]
+    $archiveName = Split-Path -Leaf $archiveUrl
+    $archivePath = "$env:USERPROFILE\.dbeaver-drivers\$archiveName"
+    Write-Host "Downloading $archiveName..."
+    mkdir -Force (Split-Path -Parent $archivePath) | Out-Null
+    Invoke-WebRequest $archiveUrl -UseBasicParsing -OutFile $archivePath
+    $archiveActualHash = (Get-FileHash $archivePath -Algorithm SHA256).Hash
+    if ($archiveHash -ne $archiveActualHash) {
+        throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
+    }
 }
 
 # install DBeaver.
