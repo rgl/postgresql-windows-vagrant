@@ -90,7 +90,7 @@ New-Item -Force -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image 
         -Value '"C:\Program Files\ApplicationReplacer\ApplicationReplacer.exe" -- "C:\Program Files\Notepad++\notepad++.exe"'
 
 # install Visual Studio Code.
-choco install -y visualstudiocode
+choco install -y vscode
 
 # install 7-Zip
 choco install -y 7zip
