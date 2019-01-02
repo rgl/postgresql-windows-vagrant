@@ -3,8 +3,8 @@ $serviceName = 'postgres_exporter'
 $serviceUsername = "NT SERVICE\$serviceName"
 
 # download and install.
-$archiveUrl = 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.4.5/postgres_exporter_v0.4.5_windows-amd64.zip'
-$archiveHash = '9460409da9efe682bf609b95510e7bae24af07b0bbd2ef98d1153ac2cce33793'
+$archiveUrl = 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.4.7/postgres_exporter_v0.4.7_windows-amd64.zip'
+$archiveHash = '59132b648cfd88fa1d7856f63f9326d2de529180eec0bbb112a13d10ff3a6830'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 (New-Object Net.WebClient).DownloadFile($archiveUrl, $archivePath)
@@ -69,8 +69,8 @@ nssm set $serviceName AppRotateFiles 1
 nssm set $serviceName AppRotateOnline 1
 nssm set $serviceName AppRotateSeconds 86400
 nssm set $serviceName AppRotateBytes 1048576
-nssm set $serviceName AppStdout $serviceHome\logs\service.log
-nssm set $serviceName AppStderr $serviceHome\logs\service.log
+nssm set $serviceName AppStdout $serviceHome\logs\service-stdout.log
+nssm set $serviceName AppStderr $serviceHome\logs\service-stderr.log
 nssm set $serviceName AppParameters `
     '--web.listen-address=localhost:9187'
 nssm set $serviceName AppEnvironmentExtra `
