@@ -186,7 +186,7 @@ Install-ChocolateyShortcut `
 # add pgAdmin 4 shortcut to the Desktop.
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\pgAdmin 4.lnk" `
-    -TargetPath 'C:\Program Files (x86)\pgAdmin 4\v2\runtime\pgAdmin4.exe'
+    -TargetPath 'C:\Program Files (x86)\pgAdmin 4\v3\runtime\pgAdmin4.exe'
 # add DBeaver shortcut to the Desktop.
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\DBeaver.lnk" `

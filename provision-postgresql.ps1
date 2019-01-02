@@ -3,14 +3,14 @@
 #    postgres by running:
 #       psql -c 'select version()' postgres
 #    which returns something like:
-#       PostgreSQL 10.3, compiled by Visual C++ build 1800, 64-bit
+#       PostgreSQL 11.0, compiled by Visual C++ build 1914, 64-bit
 #    that build 1800 is for:
-#       MSVC++ 12.0 _MSC_VER == 1800 (Visual Studio 2013).
+#       MSVC++ 14.14 _MSC_VER == 1914 (Visual Studio 2017 version 15.7).
 #    see https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
-choco install -y vcredist2013
+choco install -y vcredist2017
 
 # the default postgres superuser username and password.
-# see https://www.postgresql.org/docs/10/static/libpq-envars.html
+# see https://www.postgresql.org/docs/11/libpq-envars.html
 $env:PGUSER = 'postgres'
 $env:PGPASSWORD = 'postgres'
 
@@ -42,8 +42,8 @@ function psql {
 
 # download and install binaries.
 # see https://www.enterprisedb.com/download-postgresql-binaries
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-10.3-1-windows-x64-binaries.zip'
-$archiveHash = '9e5cc5c4d8d368042f5e3ad3a2e8a530a8d9ae9e61354ff3dece6462eccfac00'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-11.0-1-windows-x64-binaries.zip'
+$archiveHash = '73b892ec919cc6437cd546c28cd732710ed9275bcb08d2a35a12c4736bb50640'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
@@ -58,7 +58,13 @@ Move-Item "$serviceHome\pgsql\*" $serviceHome
 rmdir "$serviceHome\pgsql"
 Remove-Item $archivePath
 
-# see https://www.postgresql.org/docs/10/static/event-log-registration.html
+# postgresql 11.0 was failing with "exit code -1073741515" error because
+# libwinpthread-1.dll was not found, this will copy it from git.
+if (!(Test-Path "$serviceHome\bin\libwinpthread-1.dll")) {
+    Copy-Item 'C:\Program Files\Git\mingw64\bin\libwinpthread-1.dll' "$serviceHome\bin"
+}
+
+# see https://www.postgresql.org/docs/11/event-log-registration.html
 # see the available log names with:
 #       Get-WinEvent -ListLog * | Sort-Object LogName | Format-Table LogName
 # see the providers that write to a specific log with:
@@ -125,7 +131,7 @@ host    all             all             ::/0                    md5
 '@ `
     | Out-File -Append -Encoding ascii "$dataPath\pg_hba.conf"
 
-# see https://www.postgresql.org/docs/10/static/libpq-ssl.html
+# see https://www.postgresql.org/docs/11/libpq-ssl.html
 Write-Host 'Enabling ssl...'
 mkdir -Force "$env:APPDATA/postgresql" | Out-Null
 Copy-Item c:/vagrant/shared/postgresql-example-ca/postgresql-example-ca-crt.pem "$env:APPDATA/postgresql/root.crt"
@@ -160,7 +166,7 @@ Write-Output 'Installing the adminpack extension...'
 psql -c 'create extension adminpack' postgres
 
 Write-Output 'Showing pg version, connection information, users and databases...'
-# see https://www.postgresql.org/docs/10/static/functions-info.html
+# see https://www.postgresql.org/docs/11/functions-info.html
 psql -c 'select version()' postgres
 psql -c 'select current_user, current_database(), inet_client_addr(), inet_client_port(), inet_server_addr(), inet_server_port(), pg_backend_pid(), pg_postmaster_start_time()' postgres
 psql -c '\du' postgres

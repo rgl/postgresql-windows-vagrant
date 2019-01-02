@@ -1,7 +1,7 @@
 import psycopg2
 
 # see http://initd.org/psycopg/docs/
-# see https://www.postgresql.org/docs/10/static/libpq-connect.html#LIBPQ-CONNECT-SSLMODE
+# see https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNECT-SSLMODE
 # NB psycopg2 uses the %APPDATA%\postgresql\root.crt file to validate the server certificate.
 def sql_execute_scalar(data_source_name, sql):
     with psycopg2.connect(data_source_name) as connection:
