@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
   end
-  #config.vm.hostname = 'postgresql' # NB setting the hostname is too unreliable to use.
+  config.vm.hostname = "postgresql"
   config.vm.network :private_network, ip: '10.10.10.101', libvirt__forward_mode: 'route', libvirt__dhcp_enabled: false
   config.vm.provision "shell", inline: "'10.10.10.101 postgresql.example.com' | Out-File -Encoding Ascii -Append c:/Windows/System32/drivers/etc/hosts"
   config.vm.provision "shell", path: "ps.ps1", args: "provision-chocolatey.ps1"
