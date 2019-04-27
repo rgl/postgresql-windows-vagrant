@@ -7,7 +7,7 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
 #       psql -c 'select version()' postgres
 #    which returns something like:
 #       PostgreSQL 11.0, compiled by Visual C++ build 1914, 64-bit
-#    that build 1800 is for:
+#    that build 1914 is for:
 #       MSVC++ 14.14 _MSC_VER == 1914 (Visual Studio 2017 version 15.7).
 #    see https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
 choco install -y vcredist2017
@@ -45,8 +45,8 @@ function psql {
 
 # download and install binaries.
 # see https://www.enterprisedb.com/download-postgresql-binaries
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-11.0-1-windows-x64-binaries.zip'
-$archiveHash = '73b892ec919cc6437cd546c28cd732710ed9275bcb08d2a35a12c4736bb50640'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-11.2-2-windows-x64-binaries.zip'
+$archiveHash = 'a3578088a4ebfa1d0a3f4e5f114a9e502ca6c55d5dc4a2bad6d7c1108e56b440'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
@@ -63,9 +63,11 @@ Remove-Item $archivePath
 
 # postgresql 11.0 was failing with "exit code -1073741515" error because
 # libwinpthread-1.dll was not found, this will copy it from git.
-if (!(Test-Path "$serviceHome\bin\libwinpthread-1.dll")) {
-    Copy-Item 'C:\Program Files\Git\mingw64\bin\libwinpthread-1.dll' "$serviceHome\bin"
-}
+# TODO report this error.
+# if (!(Test-Path "$serviceHome\bin\libwinpthread-1.dll")) {
+#     Write-Output "Copying missing libwinpthread-1.dll..."
+#     Copy-Item 'C:\Program Files\Git\mingw64\bin\libwinpthread-1.dll' "$serviceHome\bin"
+# }
 
 # see https://www.postgresql.org/docs/11/event-log-registration.html
 # see the available log names with:
