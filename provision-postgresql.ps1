@@ -1,3 +1,6 @@
+Import-Module Carbon
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
+
 # install dependencies.
 # NB you can see which version of MSVC++ was used to compile
 #    postgres by running:
@@ -53,7 +56,7 @@ if ($archiveHash -ne $archiveActualHash) {
     throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
 }
 Write-Output "Installing binaries at $serviceHome..."
-Expand-Archive $archivePath -DestinationPath $serviceHome
+Get-ChocolateyUnzip -FileFullPath $archivePath -Destination $serviceHome
 Move-Item "$serviceHome\pgsql\*" $serviceHome
 rmdir "$serviceHome\pgsql"
 Remove-Item $archivePath

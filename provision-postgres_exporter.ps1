@@ -1,3 +1,6 @@
+Import-Module Carbon
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
+
 $serviceHome = 'C:/postgres_exporter'
 $serviceName = 'postgres_exporter'
 $serviceUsername = "NT SERVICE\$serviceName"
@@ -13,7 +16,7 @@ if ($archiveHash -ne $archiveActualHash) {
     throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
 }
 mkdir $serviceHome | Out-Null
-Expand-Archive $archivePath $serviceHome
+Get-ChocolateyUnzip -FileFullPath $archivePath -Destination $serviceHome
 $archiveTempPath = Resolve-Path $serviceHome\postgres_exporter_*
 Move-Item $archiveTempPath\* $serviceHome
 Remove-Item $archiveTempPath
