@@ -102,7 +102,10 @@ function downloadPhoto(url) {
 
 async function main() {
     console.log("launching...");
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({
+        headless: true,
+        dumpio: false,
+    });
     try {
         console.log("getting the browser version...");
         console.log("running under", await browser.version());
