@@ -6,3 +6,4 @@ obj/
 build/
 shared/
 node_modules/
+target/
