@@ -8,6 +8,7 @@ Update-SessionEnvironment
 # build into a fat jar.
 # NB gradle build would also work, but having a fat jar is nicier for distribution.
 Write-Output 'Building the example...'
+$env:GRADLE_OPTS = '-Dorg.gradle.daemon=false' # to save memory, do not leave the daemon running in background.
 gradle clean shadowJar
 
 # run the example.
