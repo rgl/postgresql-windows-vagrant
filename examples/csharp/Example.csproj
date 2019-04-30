@@ -4,6 +4,6 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Npgsql" Version="4.0.4" />
+    <PackageReference Include="Npgsql" Version="4.0.6" />
   </ItemGroup>
 </Project>
