@@ -2,6 +2,7 @@
 dotnet restore
 
 # show the ef-core tools version.
+dotnet tool install --global dotnet-ef
 dotnet ef --version
 
 # build and run.
