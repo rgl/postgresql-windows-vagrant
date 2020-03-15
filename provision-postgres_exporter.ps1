@@ -6,8 +6,8 @@ $serviceName = 'postgres_exporter'
 $serviceUsername = "NT SERVICE\$serviceName"
 
 # download and install.
-$archiveUrl = 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.4.7/postgres_exporter_v0.4.7_windows-amd64.zip'
-$archiveHash = '59132b648cfd88fa1d7856f63f9326d2de529180eec0bbb112a13d10ff3a6830'
+$archiveUrl = 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.8.0/postgres_exporter_v0.8.0_windows-amd64.zip'
+$archiveHash = '6bc320a043d237fdb4a3f2571a714a7e9677385ae210debcadc9323298ceb2c4'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 (New-Object Net.WebClient).DownloadFile($archiveUrl, $archivePath)
