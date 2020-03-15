@@ -1,0 +1,77 @@
+{
+	"folders": {},
+	"connections": {
+		"postgres-jdbc-postgresql": {
+			"provider": "postgresql",
+			"driver": "postgres-jdbc",
+			"name": "PostgreSQL - postgres",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "postgresql.example.com",
+				"port": "5432",
+				"database": "postgres",
+				"url": "jdbc:postgresql://postgresql.example.com:5432/postgres",
+				"home": "PostgreSQL Binaries",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-non-default-db@": "false",
+					"@dbeaver-show-template-db@": "false",
+					"postgresql.dd.plain.string": "false",
+					"postgresql.dd.tag.string": "false"
+				},
+				"handlers": {
+					"postgre_ssl": {
+						"type": "CONFIG",
+						"enabled": true,
+						"save-password": true,
+						"properties": {
+							"sslMode": "verify-full"
+						}
+					}
+				}
+			}
+		},
+		"postgres-jdbc-StarTrekEfCore": {
+			"provider": "postgresql",
+			"driver": "postgres-jdbc",
+			"name": "PostgreSQL - StarTrekEfCore",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "postgresql.example.com",
+				"port": "5432",
+				"database": "StarTrekEfCore",
+				"url": "jdbc:postgresql://postgresql.example.com:5432/StarTrekEfCore",
+				"home": "PostgreSQL Binaries",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-non-default-db@": "false",
+					"@dbeaver-show-template-db@": "false",
+					"postgresql.dd.plain.string": "false",
+					"postgresql.dd.tag.string": "false"
+				},
+				"handlers": {
+					"postgre_ssl": {
+						"type": "CONFIG",
+						"enabled": true,
+						"save-password": true,
+						"properties": {
+							"sslMode": "verify-full"
+						}
+					}
+				}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}
