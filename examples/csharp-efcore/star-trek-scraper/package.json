@@ -5,7 +5,11 @@
     "main": "main.js",
     "author": "Rui Lopes <rgl@ruilopes.com>",
     "license": "GPL-3.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rgl/postgresql-windows-vagrant.git"
+    },
     "dependencies": {
-        "puppeteer": "^1.15.0"
+        "puppeteer": "^2.1.1"
     }
 }
