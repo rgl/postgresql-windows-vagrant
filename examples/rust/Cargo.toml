@@ -5,4 +5,6 @@ authors = ["Rui Lopes <rgl@ruilopes.com>"]
 edition = "2018"
 
 [dependencies]
-postgres = {version = "0.15", features = ["with-native-tls"]}
+native-tls = "0.2.4"
+postgres = "0.17.2"
+postgres-native-tls = "0.3.0"

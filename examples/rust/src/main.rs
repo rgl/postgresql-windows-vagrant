@@ -1,10 +1,12 @@
+extern crate native_tls;
 extern crate postgres;
 
-use postgres::{Connection, TlsMode};
-use postgres::tls::native_tls::NativeTls;
+use native_tls::TlsConnector;
+use postgres_native_tls::MakeTlsConnector;
+use postgres::{Client, NoTls};
 
-fn _sql_execute_scalar(connection: &Connection, sql_statement: &str) -> String {
-    for row in &connection.query(sql_statement, &[]).unwrap() {
+fn _sql_execute_scalar(client: &mut Client, sql_statement: &str) -> String {
+    for row in client.query(sql_statement, &[]).unwrap() {
         return row.get(0);
     }
     panic!("scalar didn't return a value");
@@ -12,12 +14,13 @@ fn _sql_execute_scalar(connection: &Connection, sql_statement: &str) -> String {
 
 fn sql_execute_scalar(url: &str, use_tls: bool, sql_statement: &str) -> String {
     if use_tls {
-        let negotiator = NativeTls::new().unwrap();
-        let connection = Connection::connect(url, TlsMode::Require(&negotiator)).unwrap();
-        return _sql_execute_scalar(&connection, sql_statement);
+        let connector = TlsConnector::new().unwrap();
+        let connector = MakeTlsConnector::new(connector);
+        let mut client = Client::connect(url, connector).unwrap();
+        return _sql_execute_scalar(&mut client, sql_statement);
     } else {
-        let connection = Connection::connect(url, TlsMode::None).unwrap();
-        return _sql_execute_scalar(&connection, sql_statement);
+        let mut client = Client::connect(url, NoTls).unwrap();
+        return _sql_execute_scalar(&mut client, sql_statement);
     }
 }
 
