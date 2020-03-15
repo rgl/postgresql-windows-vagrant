@@ -45,8 +45,8 @@ function psql {
 
 # download and install binaries.
 # see https://www.enterprisedb.com/download-postgresql-binaries
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-11.2-2-windows-x64-binaries.zip'
-$archiveHash = 'a3578088a4ebfa1d0a3f4e5f114a9e502ca6c55d5dc4a2bad6d7c1108e56b440'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-12.2-1-windows-x64-binaries.zip'
+$archiveHash = '6000cb43e17bfcaea4ec36dc115804285cd3a52d7d9bff2f385da3d43f385fdb'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
