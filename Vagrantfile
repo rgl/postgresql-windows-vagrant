@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "windows-2019-amd64"
   config.vm.provider "libvirt" do |lv, config|
-    lv.memory = 2048
+    lv.memory = 3*1024
     lv.cpus = 2
     lv.cpu_mode = "host-passthrough"
     lv.keymap = "pt"
@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.provider "virtualbox" do |vb|
     vb.linked_clone = true
-    vb.memory = 2048
+    vb.memory = 3*1024
     vb.cpus = 2
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
