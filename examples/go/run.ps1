@@ -1,5 +1,5 @@
 # install go.
-choco install -y golang
+choco install -y golang --version 1.14
 
 # setup the current process environment.
 $env:GOROOT = 'C:\Go'
@@ -16,7 +16,7 @@ Write-Host '# go env'
 go env
 
 Write-Host '# install dependencies'
-go get -u github.com/lib/pq
+go mod download
 
 Write-Host '# build and run'
 $p = Start-Process go 'build','-v' `
@@ -29,4 +29,4 @@ Remove-Item build-stdout.txt,build-stderr.txt
 if ($p.ExitCode) {
     throw "Failed to compile"
 }
-.\go.exe
+.\gopg.exe
