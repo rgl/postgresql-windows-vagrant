@@ -1,9 +1,10 @@
-// see https://docs.gradle.org/5.4.1/userguide/java_plugin.html
-// see https://docs.gradle.org/5.4.1/userguide/application_plugin.html
+// see https://docs.gradle.org/6.2.2/userguide/java_plugin.html
+// see https://docs.gradle.org/6.2.2/userguide/application_plugin.html
+// see https://docs.gradle.org/6.2.2/userguide/building_java_projects.html#sec:java_dependency_management_overview
 // see http://imperceptiblethoughts.com/shadow/
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '5.0.0'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
 apply plugin: 'application'
@@ -13,20 +14,10 @@ version = '1.0.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-jar {
-    manifest {
-        attributes(
-            'Implementation-Title': 'PostgreSQL Example',
-            'Implementation-Version': version,
-            'Main-Class': mainClassName
-        )
-    }
-}
-
 repositories {
     jcenter()
 }
 
 dependencies {
-    compile 'org.postgresql:postgresql:42.2.5'
+    implementation 'org.postgresql:postgresql:42.2.11'
 }
