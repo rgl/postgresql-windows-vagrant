@@ -1,9 +1,11 @@
+mkdir -Force $env:TEMP\dbeaver-config | Out-Null
+cd $env:TEMP\dbeaver-config
 javac `
     -Werror `
     -d build/classes `
     -cp 'C:/Program Files/DBeaver/plugins/*' `
-    src/com/ruilopes/*.java
-jar cfm build/dbeaver-config.jar src/META-INF/MANIFEST.MF -C build/classes .
+    "$PSScriptRoot/src/com/ruilopes/*.java"
+jar cfm build/dbeaver-config.jar "$PSScriptRoot/src/META-INF/MANIFEST.MF" -C build/classes .
 # java `
 #     -cp 'C:/Program Files/DBeaver/plugins/*;build/dbeaver-config.jar' `
 #     com.ruilopes.Main `
