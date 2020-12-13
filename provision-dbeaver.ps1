@@ -1,5 +1,5 @@
 # install DBeaver.
-choco install -y dbeaver --version 7.0.0
+choco install -y dbeaver --version 7.3.0
 
 # configure DBeaver.
 $configPath = "$env:APPDATA\DBeaverData\workspace6\General\.dbeaver"
