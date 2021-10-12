@@ -6,7 +6,7 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
 #    postgres by running:
 #       psql -c 'select version()' postgres
 #    which returns something like:
-#       PostgreSQL 13.1, compiled by Visual C++ build 1914, 64-bit
+#       PostgreSQL 14.0, compiled by Visual C++ build 1914, 64-bit
 #    that build 1914 is for:
 #       MSVC++ 14.14 _MSC_VER == 1914 (Visual Studio 2017 version 15.7).
 #    see https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
@@ -45,8 +45,8 @@ function psql {
 
 # download and install binaries.
 # see https://www.enterprisedb.com/download-postgresql-binaries
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-13.1-1-windows-x64-binaries.zip'
-$archiveHash = '90f80410bbfda295741b09c3b7ae2e9f35981fbfabdabc1ca876e1c408ddf283'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-14.0-1-windows-x64-binaries.zip'
+$archiveHash = '8a84e4a348d5a05b669ee5733b6dadfdcbbe089b17bcbec2dbcd2ad69ff1f661'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
@@ -93,9 +93,9 @@ if ($result -ne '[SC] ChangeServiceConfig SUCCESS') {
 
 Write-Output "Initializing the database cluster at $dataPath..."
 mkdir $dataPath | Out-Null
-Disable-AclInheritance $dataPath
-Grant-Permission $dataPath $env:USERNAME FullControl
-Grant-Permission $dataPath $serviceUsername FullControl
+Disable-CAclInheritance $dataPath
+Grant-CPermission $dataPath $env:USERNAME FullControl
+Grant-CPermission $dataPath $serviceUsername FullControl
 initdb `
     --username=$env:PGUSER `
     --auth-host=trust `
