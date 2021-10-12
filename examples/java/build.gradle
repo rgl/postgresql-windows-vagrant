@@ -1,10 +1,10 @@
-// see https://docs.gradle.org/6.7.1/userguide/java_plugin.html
-// see https://docs.gradle.org/6.7.1/userguide/application_plugin.html
-// see https://docs.gradle.org/6.7.1/userguide/building_java_projects.html#sec:java_dependency_management_overview
+// see https://docs.gradle.org/7.2/userguide/java_plugin.html
+// see https://docs.gradle.org/7.2/userguide/application_plugin.html
+// see https://docs.gradle.org/7.2/userguide/building_java_projects.html#sec:java_dependency_management_overview
 // see http://imperceptiblethoughts.com/shadow/
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 apply plugin: 'application'
@@ -15,9 +15,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    implementation 'org.postgresql:postgresql:42.2.18'
+    implementation 'org.postgresql:postgresql:42.2.24'
 }
