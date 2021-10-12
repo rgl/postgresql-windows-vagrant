@@ -1,8 +1,8 @@
 # install go.
-choco install -y golang --version 1.15.6
+choco install -y golang --version 1.17.2
 
 # setup the current process environment.
-$env:GOROOT = 'C:\Go'
+$env:GOROOT = 'C:\Program Files\Go'
 $env:PATH += ";$env:GOROOT\bin"
 
 # setup the Machine environment.
