@@ -122,7 +122,7 @@ SetDefaultBrowser HKLM "Google Chrome"
 # cleanup the taskbar by removing the existing icons and unpinning all applications; once the user logs on.
 # NB the shell executes these RunOnce commands about ~10s after the user logs on.
 [IO.File]::WriteAllText(
-    "$env:TEMP\ConfigureTaskbar.ps1",
+    'C:\tmp\ConfigureTaskbar.ps1',
 @'
 # unpin all applications.
 # NB this can only be done in a logged on session.
@@ -168,14 +168,14 @@ Remove-Item -Force 'C:\Users\Public\Desktop\*.lnk'
 Remove-Item -Force "$env:USERPROFILE\Desktop\*.lnk"
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\Chrome.lnk" `
-    -TargetPath 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+    -TargetPath 'C:\Program Files\Google\Chrome\Application\chrome.exe'
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\Services.lnk" `
     -TargetPath 'C:\Windows\System32\services.msc'
 # add pgAdmin 4 shortcut to the Desktop.
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\pgAdmin 4.lnk" `
-    -TargetPath (Resolve-Path 'C:\Program Files (x86)\pgAdmin 4\*\runtime\pgAdmin4.exe')
+    -TargetPath (Resolve-Path "$env:LOCALAPPDATA\Programs\pgAdmin 4\*\runtime\pgAdmin4.exe")
 # add DBeaver shortcut to the Desktop.
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\DBeaver.lnk" `
@@ -189,5 +189,5 @@ URL=http://localhost:9187/metrics
 "@)
 '@)
 New-Item -Path HKCU:Software\Microsoft\Windows\CurrentVersion\RunOnce -Force `
-    | New-ItemProperty -Name ConfigureTaskbar -Value 'PowerShell -WindowStyle Hidden -File "%TEMP%\ConfigureTaskbar.ps1"' -PropertyType ExpandString `
+    | New-ItemProperty -Name ConfigureTaskbar -Value 'PowerShell -WindowStyle Hidden -File "C:\tmp\ConfigureTaskbar.ps1"' -PropertyType ExpandString `
     | Out-Null
