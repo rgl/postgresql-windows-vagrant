@@ -1,6 +1,6 @@
 if (!(Get-Command -ErrorAction SilentlyContinue dotnet.exe)) {
     # see https://dotnet.microsoft.com/download/dotnet-core/3.1
-    # see https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.10/3.1.404-download.md
+    # see https://github.com/dotnet/core/blob/main/release-notes/3.1/3.1.19/3.1.19.md
 
     # opt-out from dotnet telemetry.
     [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', '1', 'Machine')
@@ -8,8 +8,8 @@ if (!(Get-Command -ErrorAction SilentlyContinue dotnet.exe)) {
 
     # install the dotnet sdk.
     # NB keep this in sync with provision-iis-dotnetcore-hosting.ps1
-    $archiveUrl = 'https://download.visualstudio.microsoft.com/download/pr/3366b2e6-ed46-48ae-bf7b-f5804f6ee4c9/186f681ff967b509c6c9ad31d3d343da/dotnet-sdk-3.1.404-win-x64.exe'
-    $archiveHash = '9d12890913ec5e0d6894f769bb704673a8e15619ef19d0d1906a19f80be53f6ccbbf3f451e069676a1512755e1cd4fc4ee36becb9aa67e3c8edbce76fc854ddf'
+    $archiveUrl = 'https://download.visualstudio.microsoft.com/download/pr/70062b11-491c-403c-91db-9d84462ee292/5db435e39128cbb608e76bf5111ab3dc/dotnet-sdk-3.1.413-win-x64.exe'
+    $archiveHash = '878ca8654df81a363c4cddddb5303857f3e21be684f191f5c9cff1505038e4303524890edd778892ea13b752ea112d9ecdbb3ada2fdd8439071e6160ce02b8d7'
     $archiveName = Split-Path -Leaf $archiveUrl
     $archivePath = "$env:TEMP\$archiveName"
     Write-Host "Downloading $archiveName..."

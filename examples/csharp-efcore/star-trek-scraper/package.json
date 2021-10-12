@@ -10,6 +10,6 @@
         "url": "https://github.com/rgl/postgresql-windows-vagrant.git"
     },
     "dependencies": {
-        "puppeteer": "^2.1.1"
+        "puppeteer": "^10.4.0"
     }
 }
