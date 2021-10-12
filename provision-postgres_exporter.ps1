@@ -6,8 +6,8 @@ $serviceName = 'postgres_exporter'
 $serviceUsername = "NT SERVICE\$serviceName"
 
 # download and install.
-$archiveUrl = 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.8.0/postgres_exporter_v0.8.0_windows-amd64.zip'
-$archiveHash = '6bc320a043d237fdb4a3f2571a714a7e9677385ae210debcadc9323298ceb2c4'
+$archiveUrl = 'https://github.com/prometheus-community/postgres_exporter/releases/download/v0.10.0/postgres_exporter-0.10.0.windows-amd64.zip'
+$archiveHash = '2d87fad940f25242351675b2151508f90a82f8b47e3c0d5f5287d689ec6232af'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 (New-Object Net.WebClient).DownloadFile($archiveUrl, $archivePath)
@@ -17,7 +17,7 @@ if ($archiveHash -ne $archiveActualHash) {
 }
 mkdir $serviceHome | Out-Null
 Get-ChocolateyUnzip -FileFullPath $archivePath -Destination $serviceHome
-$archiveTempPath = Resolve-Path $serviceHome\postgres_exporter_*
+$archiveTempPath = Resolve-Path $serviceHome\postgres_exporter-*
 Move-Item $archiveTempPath\* $serviceHome
 Remove-Item $archiveTempPath
 Remove-Item $archivePath
@@ -34,10 +34,10 @@ if ($result -ne '[SC] ChangeServiceConfig2 SUCCESS') {
 
 # create and protect the logs sub-directory.
 mkdir $serviceHome/logs | Out-Null
-Disable-AclInheritance $serviceHome/logs
-Grant-Permission $serviceHome/logs SYSTEM FullControl
-Grant-Permission $serviceHome/logs Administrators FullControl
-Grant-Permission $serviceHome/logs $serviceUsername FullControl
+Disable-CAclInheritance $serviceHome/logs
+Grant-CPermission $serviceHome/logs SYSTEM FullControl
+Grant-CPermission $serviceHome/logs Administrators FullControl
+Grant-CPermission $serviceHome/logs $serviceUsername FullControl
 
 # protect the registry key that will contain secret environment variables.
 $serviceParametersKey = "HKLM:\System\CurrentControlSet\Services\$serviceName\Parameters"
