@@ -1,5 +1,6 @@
 # install go.
-choco install -y golang --version 1.17.2
+# see https://community.chocolatey.org/packages/golang
+choco install -y golang --version 1.17.7
 
 # setup the current process environment.
 $env:GOROOT = 'C:\Program Files\Go'
