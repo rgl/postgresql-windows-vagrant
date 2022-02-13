@@ -2,7 +2,7 @@
 name = "rust"
 version = "0.1.0"
 authors = ["Rui Lopes <rgl@ruilopes.com>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 native-tls = "0.2.8"
