@@ -30,5 +30,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "ps.ps1", args: "examples/csharp/run.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "examples/csharp-efcore/run.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "examples/go/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "examples/go-pgx/run.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "examples/rust/run.ps1"
 end
