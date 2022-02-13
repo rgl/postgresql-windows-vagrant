@@ -9,7 +9,7 @@ class Example
         // see http://www.npgsql.org/doc/security.html
         // NB npgsql uses the native windows Trusted Root Certification Authorities store to validate the server certificate.
         var connectionString = "Host=postgresql.example.com; Port=5432; SSL Mode=Disable; Username=postgres; Password=postgres; Database=postgres";
-        var connectionStringSsl = connectionString.Replace("SSL Mode=Disable", "SSL Mode=Require");
+        var connectionStringSsl = connectionString.Replace("SSL Mode=Disable", "SSL Mode=VerifyFull");
 
         Console.WriteLine("PostgreSQL Version:");
         Console.WriteLine(SqlExecuteScalar(connectionString, "select version()"));
