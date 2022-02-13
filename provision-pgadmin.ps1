@@ -1,2 +1,3 @@
 # install.
-choco install -y pgadmin4 --version 5.7
+# see https://community.chocolatey.org/packages/pgadmin4
+choco install -y pgadmin4 --version 6.4
