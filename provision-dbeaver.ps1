@@ -1,5 +1,6 @@
 # install DBeaver.
-choco install -y dbeaver --version 21.2.2
+# see https://community.chocolatey.org/packages/dbeaver
+choco install -y dbeaver --version 21.3.5
 
 # configure DBeaver.
 $configPath = "$env:APPDATA\DBeaverData\workspace6\General\.dbeaver"
