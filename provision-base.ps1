@@ -71,8 +71,8 @@ public static class WindowsWallpaper
 '@ -ReferencedAssemblies System.Drawing
 [WindowsWallpaper]::Set($backgroundColor, $backgroundPath)
 
-# replace notepad with notepad2.
-choco install -y notepad2
+# replace notepad with notepad3.
+choco install -y notepad3
 
 # install Visual Studio Code.
 choco install -y vscode
