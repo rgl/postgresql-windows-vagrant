@@ -6,6 +6,11 @@ Vagrant.configure("2") do |config|
     lv.cpu_mode = "host-passthrough"
     lv.keymap = "pt"
     config.vm.synced_folder ".", "/vagrant", type: "smb", smb_username: ENV["USER"], smb_password: ENV["VAGRANT_SMB_PASSWORD"]
+    # rsync the examples because some of them do not work correctly over SMB.
+    config.vm.synced_folder 'examples', '/examples', type: 'rsync', rsync__exclude: [
+      '.vagrant/',
+      '.git/',
+      '*.box']
   end
   config.vm.provider "virtualbox" do |vb|
     vb.linked_clone = true
@@ -23,13 +28,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "ps.ps1", args: "provision-postgresql.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "provision-postgres_exporter.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "provision-pgadmin.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "examples/java/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/java/run.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "provision-dbeaver.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "examples/python/run.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "examples/python-asyncpg/run.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "examples/csharp/run.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "examples/csharp-efcore/run.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "examples/go/run.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "examples/go-pgx/run.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "examples/rust/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/python/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/python-asyncpg/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/csharp/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/csharp-efcore/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/go/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/go-pgx/run.ps1"
+  config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/rust/run.ps1"
 end
