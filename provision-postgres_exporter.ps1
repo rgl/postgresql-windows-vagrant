@@ -7,8 +7,8 @@ $serviceUsername = "NT SERVICE\$serviceName"
 
 # download and install.
 # see https://github.com/prometheus-community/postgres_exporter/releases
-$archiveUrl = 'https://github.com/prometheus-community/postgres_exporter/releases/download/v0.10.1/postgres_exporter-0.10.1.windows-amd64.zip'
-$archiveHash = '9d14009c67b28ef6e22ed9153590e9717ab67f9361dda5cc36e26152b8b8ed40'
+$archiveUrl = 'https://github.com/prometheus-community/postgres_exporter/releases/download/v0.11.1/postgres_exporter-0.11.1.windows-amd64.zip'
+$archiveHash = '2aa30b751d50e1cec506c21b0e8c5f62d8e25c8e11b768c0c56a8cd03fb105c0'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 (New-Object Net.WebClient).DownloadFile($archiveUrl, $archivePath)
