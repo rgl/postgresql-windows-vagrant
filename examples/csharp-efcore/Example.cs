@@ -98,7 +98,7 @@ namespace Example
         //    see https://github.com/aspnet/EntityFrameworkCore/issues/8332
         public StarTrekContext CreateDbContext(string[] args)
         {
-            var connectionString = "Host=postgresql.example.com; Port=5432; SSL Mode=VerifyFull; Username=postgres; Password=postgres; Database=StarTrekEfCore";
+            var connectionString = "Host=postgresql.example.com; Port=5432; SSL Mode=VerifyFull; Username=startrekefcore_owner; Password=password; Database=startrekefcore";
 
             return new StarTrekContext(connectionString);
         }
@@ -113,7 +113,7 @@ namespace Example
             // see http://www.npgsql.org/doc/connection-string-parameters.html
             // see http://www.npgsql.org/doc/security.html
             // NB npgsql uses the native windows Trusted Root Certification Authorities store to validate the server certificate.
-            var connectionString = "Host=postgresql.example.com; Port=5432; SSL Mode=Disable; Username=postgres; Password=postgres; Database=StarTrekEfCore";
+            var connectionString = "Host=postgresql.example.com; Port=5432; SSL Mode=Disable; Username=csharp_efcore_app; Password=password; Database=startrekefcore";
             var connectionStringSsl = connectionString.Replace("SSL Mode=Disable", "SSL Mode=VerifyFull");
 
             using (var db = new StarTrekContext(connectionStringSsl))
