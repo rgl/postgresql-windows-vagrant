@@ -1,14 +1,14 @@
 if (!(Get-Command -ErrorAction SilentlyContinue dotnet.exe)) {
-    # see https://dotnet.microsoft.com/download/dotnet/6.0
-    # see https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.8/6.0.400.md
+    # see https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+    # see https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.12/6.0.12.md
 
     # opt-out from dotnet telemetry.
     [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', '1', 'Machine')
     $env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
 
     # install the dotnet sdk.
-    $archiveUrl = 'https://download.visualstudio.microsoft.com/download/pr/9a1d2e89-d785-4493-aaf3-73864627a1ea/245bdfaa9c46b87acfb2afbd10ecb0d0/dotnet-sdk-6.0.400-win-x64.exe'
-    $archiveHash = '2ef178ceb63590e548fb644d265c4e1f8fdc319fa7d9f31442a958ac901198e4d1edc1b6ea213527bd9f5fba7925d7a12ce9a37d0fc791862518df70fa597f61'
+    $archiveUrl = 'https://download.visualstudio.microsoft.com/download/pr/0a672516-37fb-40de-8bef-725975e0b137/a632cde8d629f9ba9c12196f7e7660db/dotnet-sdk-6.0.404-win-x64.exe'
+    $archiveHash = '4e4f9f2ad0c74aa69f488e50c8722caabb55bf8cdeca7bd265713dddf2870d2ba0978798b55d44b0f5ba2ecdd979a6d5faae79cf9645270bd5fd2a21d1fab35d'
     $archiveName = Split-Path -Leaf $archiveUrl
     $archivePath = "$env:TEMP\$archiveName"
     Write-Host "Downloading $archiveName..."
