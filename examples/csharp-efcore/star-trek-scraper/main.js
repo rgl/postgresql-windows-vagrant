@@ -50,17 +50,14 @@ async function getCharacter(page, url) {
         var data = {
             url: url,
             name: document.querySelector("h1.page-header__title").innerText,
-            gender: null,
             species: null,
-            photoUrl: document.querySelector("#mw-content-text aside.portable-infobox figure img").src,
+            photoUrl: document.querySelector("#mw-content-text aside.portable-infobox figure img")?.src,
         };
         const infoBoxEl = document.querySelector("#mw-content-text aside.portable-infobox");
-        for (const dataEl of infoBoxEl.querySelectorAll(".pi-data")) {
+        const infoBoxDataEls = infoBoxEl?.querySelectorAll(".pi-data");
+        for (const dataEl of (infoBoxDataEls?.length ? infoBoxDataEls : [])) {
             const label = dataEl.querySelector(".pi-data-label").innerText;
             switch (label) {
-                case "Gender:":
-                    data.gender = dataEl.querySelector(".pi-data-value").innerText.toLowerCase();
-                    break;
                 case "Species:":
                     data.species = dataEl.querySelector(".pi-data-value").innerText;
                     break;
@@ -69,10 +66,14 @@ async function getCharacter(page, url) {
         return data;
     }, url);
 
+    if (!data || !data.url || !data.name || !data.species || !data.photoUrl) {
+        console.log("WARNING: scrape did return useful data", url);
+        return null;
+    }
+
     return {
         url: data.url,
         name: data.name,
-        gender: data.gender,
         species: data.species,
         photo: (await downloadPhoto(data.photoUrl)).toString("base64"),
     };
@@ -133,6 +134,9 @@ async function main() {
 
         for (const c of characters) {
             const character = await getCharacter(page, c.url);
+            if (!character) {
+                continue;
+            }
             data[c.series].push(character);
         }
 

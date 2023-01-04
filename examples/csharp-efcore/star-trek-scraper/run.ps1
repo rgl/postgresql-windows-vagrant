@@ -1,5 +1,6 @@
 Write-Host 'Installing dependencies...'
-choco install -y nodejs-lts --version 14.18.0
+# see https://community.chocolatey.org/packages/nodejs-lts
+choco install -y nodejs-lts --version 18.12.1
 
 # update $env:PATH with the recently installed Chocolatey packages.
 Import-Module C:\ProgramData\chocolatey\helpers\chocolateyInstaller.psm1
