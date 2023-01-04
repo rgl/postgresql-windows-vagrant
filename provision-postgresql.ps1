@@ -6,14 +6,14 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
 #    postgres by running:
 #       psql -c 'select version()' postgres
 #    which returns something like:
-#       PostgreSQL 14.5, compiled by Visual C++ build 1914, 64-bit
+#       PostgreSQL 15.1, compiled by Visual C++ build 1914, 64-bit
 #    that build 1914 is for:
 #       MSVC++ 14.14 _MSC_VER == 1914 (Visual Studio 2017 version 15.7).
 #    see https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
 choco install -y vcredist2017
 
 # the default postgres superuser username and password.
-# see https://www.postgresql.org/docs/14/libpq-envars.html
+# see https://www.postgresql.org/docs/15/libpq-envars.html
 $env:PGUSER = 'postgres'
 $env:PGPASSWORD = 'postgres'
 
@@ -45,8 +45,8 @@ function psql {
 
 # download and install binaries.
 # see https://www.enterprisedb.com/download-postgresql-binaries
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-14.5-1-windows-x64-binaries.zip'
-$archiveHash = '7e2cd7c82741667c5effd736d5da31fb0aeefc0eba5c8c69f89340519b265017'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-15.1-1-windows-x64-binaries.zip'
+$archiveHash = '234e97babdb52eeed87a2bb4e8fa262244800dfd248f304d985dbda6f9a233ba'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
@@ -61,7 +61,7 @@ Move-Item "$serviceHome\pgsql\*" $serviceHome
 rmdir "$serviceHome\pgsql"
 Remove-Item $archivePath
 
-# see https://www.postgresql.org/docs/14/event-log-registration.html
+# see https://www.postgresql.org/docs/15/event-log-registration.html
 # see the available log names with:
 #       Get-WinEvent -ListLog * | Sort-Object LogName | Format-Table LogName
 # see the providers that write to a specific log with:
@@ -128,7 +128,7 @@ host    all             all             ::/0                    md5
 '@ `
     | Out-File -Append -Encoding ascii "$dataPath\pg_hba.conf"
 
-# see https://www.postgresql.org/docs/14/libpq-ssl.html
+# see https://www.postgresql.org/docs/15/libpq-ssl.html
 Write-Host 'Enabling ssl...'
 mkdir -Force "$env:APPDATA/postgresql" | Out-Null
 Copy-Item c:/vagrant/shared/postgresql-example-ca/postgresql-example-ca-crt.pem "$env:APPDATA/postgresql/root.crt"
@@ -163,7 +163,7 @@ Write-Output 'Installing the adminpack extension...'
 psql -c 'create extension adminpack' postgres
 
 Write-Output 'Showing pg version, connection information, users and databases...'
-# see https://www.postgresql.org/docs/14/functions-info.html
+# see https://www.postgresql.org/docs/15/functions-info.html
 psql -c 'select version()' postgres
 psql -c 'select current_user, current_database(), inet_client_addr(), inet_client_port(), inet_server_addr(), inet_server_port(), pg_backend_pid(), pg_postmaster_start_time()' postgres
 psql -c '\du' postgres
