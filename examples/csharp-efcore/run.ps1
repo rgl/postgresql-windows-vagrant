@@ -28,6 +28,7 @@ create role startrekefcore_writer;
 --
 -- permissions.
 --
+alter database startrekefcore owner to startrekefcore_owner;
 revoke all privileges on database startrekefcore from public;
 grant all privileges on database startrekefcore to startrekefcore_owner;
 grant connect on database startrekefcore to startrekefcore_writer;
