@@ -63,7 +63,7 @@ Remove-Item env:PGPASSWORD
 dotnet restore
 
 # show the ef-core tools version.
-dotnet tool install --global dotnet-ef --version 6.0.8
+dotnet tool install --global dotnet-ef --version 7.0.1
 dotnet ef --version
 
 # build.
