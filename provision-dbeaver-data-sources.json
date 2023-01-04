@@ -32,17 +32,17 @@
 				}
 			}
 		},
-		"postgres-jdbc-StarTrekEfCore": {
+		"postgres-jdbc-startrekefcore": {
 			"provider": "postgresql",
 			"driver": "postgres-jdbc",
-			"name": "PostgreSQL - StarTrekEfCore",
+			"name": "PostgreSQL - startrekefcore",
 			"save-password": true,
 			"read-only": false,
 			"configuration": {
 				"host": "postgresql.example.com",
 				"port": "5432",
-				"database": "StarTrekEfCore",
-				"url": "jdbc:postgresql://postgresql.example.com:5432/StarTrekEfCore",
+				"database": "startrekefcore",
+				"url": "jdbc:postgresql://postgresql.example.com:5432/startrekefcore",
 				"home": "PostgreSQL Binaries",
 				"type": "dev",
 				"provider-properties": {
