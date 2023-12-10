@@ -3,7 +3,7 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
 # install rust.
 # see https://community.chocolatey.org/packages/rust-ms
 choco install -y visualstudio2019-workload-vctools
-choco install -y rust-ms --version 1.66.0
+choco install -y rust-ms --version 1.74.1
 Update-SessionEnvironment
 
 Write-Host '# rust version'

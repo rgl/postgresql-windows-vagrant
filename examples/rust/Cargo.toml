@@ -6,5 +6,5 @@ edition = "2021"
 
 [dependencies]
 native-tls = "0.2.11"
-postgres = "0.19.4"
+postgres = "0.19.7"
 postgres-native-tls = "0.5.0"
