@@ -1,6 +1,6 @@
 # install python.
 # see https://community.chocolatey.org/packages/python
-choco install -y python --version 3.11.0
+choco install -y python --version 3.12.1
 
 # update $env:PATH with the recently installed Chocolatey packages.
 Import-Module C:\ProgramData\chocolatey\helpers\chocolateyInstaller.psm1
