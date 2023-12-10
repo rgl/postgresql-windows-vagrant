@@ -1,24 +1,30 @@
-// see https://docs.gradle.org/7.5/userguide/java_plugin.html
-// see https://docs.gradle.org/7.5/userguide/application_plugin.html
-// see https://docs.gradle.org/7.5/userguide/building_java_projects.html#sec:java_dependency_management_overview
+// see https://docs.gradle.org/8.5/userguide/java_plugin.html
+// see https://docs.gradle.org/8.5/userguide/application_plugin.html
+// see https://docs.gradle.org/8.5/userguide/building_java_projects.html#sec:java_dependency_management_overview
 // see http://imperceptiblethoughts.com/shadow/
 // see https://github.com/johnrengelman/shadow/
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-apply plugin: 'application'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
-mainClassName = 'Example'
+application {
+    mainClass = 'Example'
+}
+
 version = '1.0.0'
-sourceCompatibility = 11
-targetCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.postgresql:postgresql:42.5.1'
+    implementation 'org.postgresql:postgresql:42.7.1'
 }
