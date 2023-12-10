@@ -29,7 +29,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "ps.ps1", args: "provision-postgres_exporter.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "provision-pgadmin.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/java/run.ps1"
-  config.vm.provision "shell", path: "ps.ps1", args: "provision-dbeaver.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/python/run.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/python-asyncpg/run.ps1"
   config.vm.provision "shell", path: "ps.ps1", args: "c:/examples/csharp/run.ps1"

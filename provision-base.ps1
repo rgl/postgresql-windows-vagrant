@@ -176,10 +176,6 @@ Install-ChocolateyShortcut `
 Install-ChocolateyShortcut `
     -ShortcutFilePath "$env:USERPROFILE\Desktop\pgAdmin 4.lnk" `
     -TargetPath (Resolve-Path "$env:LOCALAPPDATA\Programs\pgAdmin 4\*\runtime\pgAdmin4.exe")
-# add DBeaver shortcut to the Desktop.
-Install-ChocolateyShortcut `
-    -ShortcutFilePath "$env:USERPROFILE\Desktop\DBeaver.lnk" `
-    -TargetPath 'C:\Program Files\DBeaver\dbeaver.exe'
 # add the postgres_exporter shortcut to the Desktop.
 [IO.File]::WriteAllText(
     "$env:USERPROFILE\Desktop\Postgres Exporter.url",
