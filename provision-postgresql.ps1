@@ -6,7 +6,7 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
 #    postgres by running:
 #       psql -c 'select version()' postgres
 #    which returns something like:
-#       PostgreSQL 16.1, compiled by Visual C++ build 1937, 64-bit
+#       PostgreSQL 16.2, compiled by Visual C++ build 1937, 64-bit
 #    that build 1937 is for:
 #       MSVC++ 14.30 _MSC_VER == 1937 (Visual Studio 2022 version 17.7).
 #    see https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
@@ -45,8 +45,8 @@ function psql {
 
 # download and install binaries.
 # see https://www.enterprisedb.com/download-postgresql-binaries
-$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-16.1-1-windows-x64-binaries.zip'
-$archiveHash = '0179cc6d863139b68d1d1a69bdb58db766b040c6b6f2976dd1c5adf83dd0b6de'
+$archiveUrl = 'https://get.enterprisedb.com/postgresql/postgresql-16.2-1-windows-x64-binaries.zip'
+$archiveHash = 'c510b3058c161479bfbe0aeac878ca682b344fd9385c58a359690147a4ca1a6c'
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 Write-Output "Downloading from $archiveUrl..."
