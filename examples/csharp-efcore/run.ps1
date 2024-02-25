@@ -65,7 +65,7 @@ dotnet restore
 # show the ef-core tools version.
 # see https://www.nuget.org/packages/dotnet-ef
 # renovate: datasource=nuget depName=dotnet-ef
-$dotnetEfVersion = '8.0.0'
+$dotnetEfVersion = '8.0.2'
 dotnet tool install --global dotnet-ef --version $dotnetEfVersion
 dotnet ef --version
 
