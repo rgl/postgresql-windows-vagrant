@@ -12,6 +12,12 @@ vagrant up
 
 The default superuser username and password are `postgres`.
 
+List this repository dependencies (and which have newer versions):
+
+```bash
+GITHUB_COM_TOKEN='YOUR_GITHUB_PERSONAL_TOKEN' ./renovate.sh
+```
+
 # SSL
 
 Different libraries use different sources to validate the server certificate:

@@ -1,6 +1,8 @@
 # install python.
 # see https://community.chocolatey.org/packages/python
-choco install -y python --version 3.12.1
+# renovate: datasource=nuget:chocolatey depName=python
+$pythonVersion = '3.12.1'
+choco install -y python --version $pythonVersion
 
 # update $env:PATH with the recently installed Chocolatey packages.
 Import-Module C:\ProgramData\chocolatey\helpers\chocolateyInstaller.psm1

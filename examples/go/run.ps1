@@ -1,6 +1,8 @@
 # install go.
 # see https://community.chocolatey.org/packages/golang
-choco install -y golang --version 1.21.5
+# renovate: datasource=nuget:chocolatey depName=golang
+$golangVersion = '1.21.5'
+choco install -y golang --version $golangVersion
 
 # setup the current process environment.
 $env:GOROOT = 'C:\Program Files\Go'

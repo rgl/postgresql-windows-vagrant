@@ -7,15 +7,12 @@ $serviceUsername = "NT SERVICE\$serviceName"
 
 # download and install.
 # see https://github.com/prometheus-community/postgres_exporter/releases
-$archiveUrl = 'https://github.com/prometheus-community/postgres_exporter/releases/download/v0.15.0/postgres_exporter-0.15.0.windows-amd64.zip'
-$archiveHash = '57c9f0528c74360d4d344443feb6bdf86902ea6f81b7e91d69d2dce05cfda17e'
+# renovate: datasource=github-releases depName=prometheus-community/postgres_exporter
+$archiveVersion = '0.15.0'
+$archiveUrl = "https://github.com/prometheus-community/postgres_exporter/releases/download/v$archiveVersion/postgres_exporter-$archiveVersion.windows-amd64.zip"
 $archiveName = Split-Path $archiveUrl -Leaf
 $archivePath = "$env:TEMP\$archiveName"
 (New-Object Net.WebClient).DownloadFile($archiveUrl, $archivePath)
-$archiveActualHash = (Get-FileHash $archivePath -Algorithm SHA256).Hash
-if ($archiveHash -ne $archiveActualHash) {
-    throw "$archiveName downloaded from $archiveUrl to $archivePath has $archiveActualHash hash witch does not match the expected $archiveHash"
-}
 mkdir $serviceHome | Out-Null
 Get-ChocolateyUnzip -FileFullPath $archivePath -Destination $serviceHome
 $archiveTempPath = Resolve-Path $serviceHome\postgres_exporter-*
