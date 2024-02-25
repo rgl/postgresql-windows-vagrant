@@ -5,7 +5,7 @@ $temurin21Version = '21.0.2'
 choco install -y temurin21 --version $temurin21Version
 # see https://community.chocolatey.org/packages/gradle
 # renovate: datasource=nuget:chocolatey depName=gradle
-$gradleVersion = '8.5.0'
+$gradleVersion = '8.6.0'
 choco install -y gradle --version $gradleVersion
 
 # update $env:PATH with the recently installed Chocolatey packages.
