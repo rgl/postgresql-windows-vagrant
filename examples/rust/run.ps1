@@ -6,7 +6,7 @@ choco install -y visualstudio2019-workload-vctools
 # install rust.
 # see https://community.chocolatey.org/packages/rust-ms
 # renovate: datasource=nuget:chocolatey depName=rust-ms
-$rustVersion = '1.76.0'
+$rustVersion = '1.77.1'
 choco install -y rust-ms --version $rustVersion
 
 # reload the environment variables.
